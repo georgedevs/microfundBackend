@@ -8,6 +8,7 @@ import AppError from '@/utils/error';
  * @route POST /api/wallet/withdraw
  * @access Private
  */
+// In withdraw.controller.ts
 export const withdrawToBank = catchAsyncError(async (
   req: Request, 
   res: Response, 
@@ -16,6 +17,7 @@ export const withdrawToBank = catchAsyncError(async (
   const userId = req.user.id;
   const { amount, bankCode, accountNumber, accountName } = req.body;
 
+  // Input validation
   if (!amount || !bankCode || !accountNumber || !accountName) {
     return next(new AppError('Please provide all required fields', 400));
   }
@@ -24,17 +26,24 @@ export const withdrawToBank = catchAsyncError(async (
     return next(new AppError('Please provide a valid amount', 400));
   }
 
-  const result = await walletService.withdrawToBank(
-    userId,
-    amount,
-    bankCode,
-    accountNumber,
-    accountName
-  );
+  try {
+    // Process withdrawal
+    const result = await walletService.withdrawToBank(
+      userId,
+      amount,
+      bankCode,
+      accountNumber,
+      accountName
+    );
 
-  res.status(200).json({
-    success: true,
-    message: 'Withdrawal processed successfully',
-    data: result
-  });
+    res.status(200).json({
+      success: true,
+      message: 'Withdrawal processed successfully',
+      data: result
+    });
+  } catch (error) {
+    // Log and pass to error handler
+    console.error('Withdrawal error:', error);
+    next(error);
+  }
 });

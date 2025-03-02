@@ -230,63 +230,67 @@ export class SquadPaymentService {
   /**
    * Create Payment Link API
    */
-  async createPaymentLink(
-    name: string, 
-    hash: string, 
-    amount: number, // in naira
-    description: string,
-    redirectLink: string = this.redirectUrl
-  ) {
-    try {
-      // Set expiry date to 30 days from now
-      const expiryDate = new Date();
-      expiryDate.setDate(expiryDate.getDate() + 30);
-      
-      const response = await axios.post(
-        `${this.apiUrl}/payment_link/otp`,
-        {
-          name,
-          hash,
-          link_status: 1, // Active
-          expire_by: expiryDate.toISOString(),
-          amounts: [
-            {
-              amount: amount * 100, // Convert to kobo
-              currency_id: "NGN"
-            }
-          ],
-          description,
-          redirect_link: redirectLink,
-          return_msg: "Payment successful"
+// In squad.service.ts - createPaymentLink method
+async createPaymentLink(name, hash, amount, description, redirectLink = this.redirectUrl) {
+  try {
+    // Set expiry date to 30 days from now
+    const expiryDate = new Date();
+    expiryDate.setDate(expiryDate.getDate() + 30);
+    
+    const response = await axios.post(
+      `${this.apiUrl}/payment_link/otp`,
+      {
+        name,
+        hash,
+        link_status: 1, // Active
+        expire_by: expiryDate.toISOString(),
+        amounts: [
+          {
+            amount: amount * 100, // Convert to kobo
+            currency_id: "NGN"
+          }
+        ],
+        description,
+        redirect_link: redirectLink,
+        return_msg: "Payment successful"
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${this.secretKey}`,
+          'Content-Type': 'application/json',
         },
-        {
-          headers: {
-            Authorization: `Bearer ${this.secretKey}`,
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-
-      if (response.data && response.data.status === 200) {
-        return {
-          success: true,
-          data: response.data.data,
-          paymentUrl: `https://sandbox-pay.squadco.com/${hash}`
-        };
+        timeout: 15000 // Add timeout to prevent hanging requests
       }
+    );
 
-      throw new AppError(
-        response.data?.message || 'Payment link creation failed',
-        response.data?.status || 400
-      );
-    } catch (error: any) {
-      console.error('Error creating payment link:', error.response?.data || error.message);
-      throw new AppError(
-        error.response?.data?.message || 'Error creating payment link',
-        error.response?.status || 500
-      );
+    if (response.data && response.data.status === 200) {
+      // Construct the payment URL based on environment
+      const baseUrl = process.env.NODE_ENV === 'production' 
+        ? 'https://pay.squadco.com/' 
+        : 'https://sandbox-pay.squadco.com/';
+      
+      return {
+        success: true,
+        data: response.data.data,
+        paymentUrl: `${baseUrl}${hash}`
+      };
     }
+
+    console.error('Squad API Error (Payment Link):', response.data);
+    return {
+      success: false,
+      message: response.data?.message || 'Payment link creation failed',
+      data: response.data
+    };
+  } catch (error) {
+    console.error('Error creating payment link:', error.response?.data || error.message);
+    return {
+      success: false,
+      message: error.response?.data?.message || 'Error creating payment link',
+      error
+    };
   }
+}
 }
 
 // Export as singleton

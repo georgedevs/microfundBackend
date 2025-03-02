@@ -30,56 +30,6 @@ constructor() {
  * Create a virtual account for a user
  */
 async createVirtualAccount(userId: string) {
-    // If mock payment is enabled, create a mock virtual account
-    if (process.env.USE_MOCK_PAYMENT === 'true') {
-      try {
-        // Get user details
-        const user = await User.findById(userId);
-        if (!user) {
-          throw new AppError('User not found', 404);
-        }
-  
-        // Get wallet
-        const wallet = await Wallet.findOne({ userId });
-        if (!wallet) {
-          throw new AppError('Wallet not found', 404);
-        }
-  
-        // Check if wallet already has a virtual account
-        if (wallet.accountNumber) {
-          return {
-            success: true,
-            data: {
-              accountNumber: wallet.accountNumber,
-              accountName: wallet.accountName,
-              bankName: wallet.bankName
-            }
-          };
-        }
-  
-        // Create mock virtual account
-        wallet.squadVirtualAccountId = `MOCK-VA-${userId.substring(0, 6)}`;
-        wallet.accountNumber = `${Math.floor(1000000000 + Math.random() * 9000000000)}`;
-        wallet.accountName = user.fullName;
-        wallet.bankName = "Squad Microfinance Bank";
-        
-        await wallet.save();
-        
-        return {
-          success: true,
-          data: {
-            accountNumber: wallet.accountNumber,
-            accountName: wallet.accountName,
-            bankName: wallet.bankName
-          }
-        };
-      } catch (error) {
-        console.error('Error creating mock virtual account:', error);
-        throw new AppError('Failed to create virtual account', 500);
-      }
-    }
-  
-    // Real implementation for non-mock environment
     try {
       // Get user details
       const user = await User.findById(userId);

@@ -320,117 +320,116 @@ export class WalletService {
   /**
    * Withdraw funds to bank account
    */
-  async withdrawToBank(
-    userId: string,
-    amount: number,
-    bankCode: string,
-    accountNumber: string,
-    accountName: string
-  ) {
-    if (amount < 500) {
-      throw new AppError('Minimum withdrawal amount is ₦500', 400);
+// In wallet.service.ts - withdrawToBank method
+async withdrawToBank(userId, amount, bankCode, accountNumber, accountName) {
+  // Validate amount
+  if (amount < 500) {
+    throw new AppError('Minimum withdrawal amount is ₦500', 400);
+  }
+
+  // First verify account exists
+  try {
+    await bankService.verifyBankAccount(bankCode, accountNumber);
+  } catch (error) {
+    throw new AppError(`Account verification failed: ${error.message}`, 400);
+  }
+
+  const session = await mongoose.startSession();
+  session.startTransaction();
+
+  try {
+    // Check wallet balance
+    const wallet = await Wallet.findOne({ userId });
+    if (!wallet) {
+      throw new AppError('Wallet not found', 404);
     }
 
-    // Verify account before proceeding
-    await bankService.verifyBankAccount(bankCode, accountNumber);
+    if (wallet.balance < amount) {
+      throw new AppError('Insufficient funds', 400);
+    }
 
-    const session = await mongoose.startSession();
-    session.startTransaction();
+    // Generate reference
+    const reference = `MF-WDR-${Date.now()}-${crypto.randomBytes(4).toString('hex')}`;
 
+    // Create transaction record
+    const transaction = await Transaction.create([{
+      userId,
+      type: 'withdrawal',
+      amount,
+      status: 'pending',
+      reference,
+      description: `Withdrawal to ${accountName} (${accountNumber})`,
+      metadata: {
+        bankCode,
+        accountNumber,
+        accountName
+      }
+    }], { session });
+
+    // Deduct from wallet
+    wallet.balance -= amount;
+    await wallet.save({ session });
+
+    // Update user balance
+    const user = await User.findById(userId);
+    if (user) {
+      user.walletBalance -= amount;
+      await user.save({ session });
+    }
+
+    await session.commitTransaction();
+    session.endSession();
+
+    // Process transfer outside transaction
     try {
-      // Check user wallet
-      const wallet = await Wallet.findOne({ userId });
-      if (!wallet) {
-        throw new AppError('Wallet not found', 404);
-      }
-
-      // Verify sufficient balance
-      if (wallet.balance < amount) {
-        throw new AppError('Insufficient funds', 400);
-      }
-
-      // Generate reference
-      const reference = `MF-WDR-${Date.now()}-${crypto.randomBytes(4).toString('hex')}`;
-
-      // Create transaction record (pending status initially)
-      const transaction = await Transaction.create([{
-        userId,
-        type: 'withdrawal',
-        amount,
-        status: 'pending',
+      const result = await paymentService.transferFunds(
         reference,
-        description: `Withdrawal to ${accountName} (${accountNumber})`,
-        metadata: {
-          bankCode,
-          accountNumber,
-          accountName
-        }
-      }], { session });
+        amount,
+        bankCode,
+        accountNumber,
+        accountName,
+        `MicroFund withdrawal for ${user?.email || userId}`
+      );
 
-      // Deduct from wallet
-      wallet.balance -= amount;
-      await wallet.save({ session });
-
-      // Update user model balance
-      const user = await User.findById(userId);
-      if (user) {
-        user.walletBalance -= amount;
-        await user.save({ session });
-      }
-
-      await session.commitTransaction();
-
-      // Process transfer (outside transaction since it's an external API call)
-      try {
-        const result = await paymentService.transferFunds(
-          reference,
-          amount,
-          bankCode,
-          accountNumber,
-          accountName,
-          `MicroFund withdrawal for ${user?.email || userId}`
+      if (result.success) {
+        // Update transaction status
+        await Transaction.findOneAndUpdate(
+          { reference },
+          { 
+            status: 'completed',
+            metadata: {
+              ...transaction[0].metadata,
+              transferReference: result.data.nip_transaction_reference
+            }
+          }
         );
 
-        if (result.success) {
-          // Update transaction to completed
-          await Transaction.findOneAndUpdate(
-            { reference },
-            { 
-              status: 'completed',
-              metadata: {
-                ...transaction[0].metadata,
-                transferReference: result.data.nip_transaction_reference
-              }
-            }
-          );
-
-          return {
-            success: true,
-            transaction: {
-              ...transaction[0].toObject(),
-              status: 'completed'
-            },
-            transferDetails: result.data
-          };
-        } else {
-          // Handle failed transfer
-          // In a real implementation, you might need a background job to retry or manual intervention
-          await this.reverseWithdrawal(userId, amount, reference);
-          
-          throw new AppError('Fund transfer failed', 500);
-        }
-      } catch (error) {
-        // Reverse the withdrawal if transfer fails
+        return {
+          success: true,
+          transaction: {
+            ...transaction[0].toObject(),
+            status: 'completed'
+          },
+          transferDetails: result.data
+        };
+      } else {
+        // Reverse if transfer failed
         await this.reverseWithdrawal(userId, amount, reference);
-        throw error;
+        throw new AppError('Fund transfer failed: ' + result.message, 500);
       }
     } catch (error) {
-      await session.abortTransaction();
+      // Reverse withdrawal if transfer fails
+      await this.reverseWithdrawal(userId, amount, reference);
       throw error;
-    } finally {
+    }
+  } catch (error) {
+    if (session.inTransaction()) {
+      await session.abortTransaction();
       session.endSession();
     }
+    throw error;
   }
+}
 
   /**
    * Reverse a withdrawal (private helper method)

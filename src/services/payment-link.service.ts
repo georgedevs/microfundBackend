@@ -9,22 +9,23 @@ export class PaymentLinkService {
 /**
  * Create a shareable payment link
  */
+
 async createPaymentLink(userId, amount, description, redirectLink) {
   // Validate amount
   if (amount < 100) {
     throw new AppError('Minimum amount is ₦100', 400);
   }
 
-  const user = await User.findById(userId);
-  if (!user) {
-    throw new AppError('User not found', 404);
-  }
-
-  // Generate a unique hash for the payment link
-  const hash = `mf-${userId.substring(0, 5)}-${Date.now().toString(36)}`;
-  
-  // Create payment link using Squad API
   try {
+    const user = await User.findById(userId);
+    if (!user) {
+      throw new AppError('User not found', 404);
+    }
+
+    // Generate a unique hash
+    const hash = `mf-${userId.substring(0, 5)}-${Date.now().toString(36)}`;
+    
+    // Call Payment API
     const result = await paymentService.createPaymentLink(
       `MicroFund - ${user.fullName}`,
       hash,
@@ -34,6 +35,7 @@ async createPaymentLink(userId, amount, description, redirectLink) {
     );
 
     if (!result.success) {
+      console.error('Payment link creation failed:', result);
       throw new AppError('Failed to create payment link', 500);
     }
 
@@ -62,7 +64,7 @@ async createPaymentLink(userId, amount, description, redirectLink) {
     };
   } catch (error) {
     console.error('Error creating payment link:', error);
-    throw new AppError('Error creating payment link', 500);
+    throw new AppError(`Error creating payment link: ${error.message}`, 500);
   }
 }
 

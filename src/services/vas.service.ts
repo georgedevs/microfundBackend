@@ -15,7 +15,11 @@ export class VASService {
       ? `${process.env.SQUAD_API_URL}/vending` || 'https://api-d.squadco.com/vending'
       : `${process.env.SQUAD_API_URL}/vending` || 'https://sandbox-api-d.squadco.com/vending';
       
-    this.secretKey = process.env.SQUAD_SECRET_KEY || '';
+    this.secretKey = process.env.NODE_ENV === 'production'
+      ? process.env.SQUAD_SECRET_KEY
+      : process.env.SQUAD_SANDBOX_SECRET_KEY || process.env.SQUAD_SECRET_KEY;
+      
+    console.log(`VAS Service initialized with API URL: ${this.apiUrl}`);
   }
 
   /**
@@ -142,24 +146,26 @@ async getDataBundles(network) {
   }
 
   try {
-    const response = await axios.get(
-      `${this.apiUrl}/data-bundles?network=${network}`,
-      {
-        headers: {
-          Authorization: `Bearer ${this.secretKey}`,
-        },
-        timeout: 15000,
-      }
-    );
+    const url = `${this.apiUrl}/data-bundles?network=${network}`;
+    console.log(`Fetching data bundles from: ${url}`);
+    
+    const response = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${this.secretKey}`,
+      },
+      timeout: 15000, // Add timeout
+    });
 
     if (response.data && response.data.status === 200) {
       return response.data.data;
     } else {
-      throw new AppError('Failed to fetch data bundles', 500);
+      console.error('Error response from data bundles API:', response.data);
+      throw new AppError(response.data?.message || 'Failed to fetch data bundles', 
+                          response.data?.status || 500);
     }
   } catch (error) {
-    console.error('Error fetching data bundles:', error);
-    throw new AppError('Error fetching data bundles: ' + (error.response?.data?.message || error.message), 500);
+    console.error('Error fetching data bundles:', error.response?.data || error.message);
+    throw new AppError(`Error fetching data bundles: ${error.response?.data?.message || error.message}`, 500);
   }
 }
 

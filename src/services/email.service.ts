@@ -9,7 +9,7 @@ export class EmailService {
 
   constructor() {
     this.fromEmail = process.env.EMAIL_FROM || 'support@microfund.com';
-
+  
     // Create a transporter (for development, use Ethereal; for production, use a real service)
     if (process.env.NODE_ENV === 'production') {
       this.transporter = nodemailer.createTransport({
@@ -20,6 +20,9 @@ export class EmailService {
           user: process.env.EMAIL_USER,
           pass: process.env.EMAIL_PASSWORD,
         },
+        // Add timeouts to prevent hanging
+        connectionTimeout: 10000,
+        socketTimeout: 10000,
       });
     } else {
       // For development, use Ethereal (https://ethereal.email/)
@@ -32,6 +35,8 @@ export class EmailService {
             user: account.user,
             pass: account.pass,
           },
+          connectionTimeout: 10000,
+          socketTimeout: 10000,
         });
         console.log('Ethereal email account created for testing: ', account.user);
       }).catch(error => {
@@ -173,6 +178,7 @@ export class EmailService {
     return this.sendEmail(user.email, subject, html);
   }
 
+  
   /**
    * Send investment opportunity alert
    */
