@@ -1,351 +1,338 @@
-MICROFUND COMPREHENSIVE TEST RUN: 2025-03-02T22:14:29.499Z
+MICROFUND COMPREHENSIVE TEST RUN: 2025-03-02T22:28:41.457Z
 Mode: MOCK
 API URL: http://localhost:5000/api
 ================================================================================
 
 
 ================================================================================
-[2025-03-02T22:14:29.502Z] Starting MicroFund API Comprehensive Tests
+[2025-03-02T22:28:41.461Z] Starting MicroFund API Comprehensive Tests
 ================================================================================
 
-[2025-03-02T22:14:29.504Z] Mode: MOCK
-[2025-03-02T22:14:29.505Z] API URL: http://localhost:5000/api
+[2025-03-02T22:28:41.464Z] Mode: MOCK
+[2025-03-02T22:28:41.465Z] API URL: http://localhost:5000/api
 
 ================================================================================
-[2025-03-02T22:14:29.507Z] Running test: healthCheck
+[2025-03-02T22:28:41.467Z] Running test: healthCheck
 ================================================================================
 
-[2025-03-02T22:14:29.508Z] Sending GET request to /health
-[2025-03-02T22:14:29.546Z] Response status: 200
-[2025-03-02T22:14:29.547Z] Response data: {"status":"ok"}
-[2025-03-02T22:14:29.548Z] API is up and running
-[2025-03-02T22:14:29.550Z] Test 'healthCheck' completed successfully in 42ms
+[2025-03-02T22:28:41.469Z] Sending GET request to /health
+[2025-03-02T22:28:41.512Z] Response status: 200
+[2025-03-02T22:28:41.513Z] Response data: {"status":"ok"}
+[2025-03-02T22:28:41.514Z] API is up and running
+[2025-03-02T22:28:41.516Z] Test 'healthCheck' completed successfully in 47ms
 
 ================================================================================
-[2025-03-02T22:14:29.552Z] Running test: authenticate
+[2025-03-02T22:28:41.517Z] Running test: authenticate
 ================================================================================
 
-[2025-03-02T22:14:29.553Z] Using test user with email: test2564@university.edu.ng
-[2025-03-02T22:14:29.555Z] Sending POST request to /auth/register with data: {"email":"test2564@university.edu.ng","password":"Password123!","fullName":"Test User","institution":"University of Lagos","department":"Computer Science","level":"300"}
-[2025-03-02T22:14:30.859Z] Response status: 201
-[2025-03-02T22:14:30.860Z] Response data: {"success":true,"message":"User registered successfully","data":{"user":{"id":"67c4d846ceaf1bf4dc3e1f5f","fullName":"Test User","email":"test2564@university.edu.ng","institution":"University of Lagos"},"token":"eyJhbGciOiJIUzI1NiIsImtpZCI6IktreHEvc0txYUU1aStnQnAiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2V5ZWNzdWZvb3FrZmZsbXVramh5LnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiIwNjRiYzMwYS0yMGNmLTQ4NDMtYjg1Mi03NjI3MmExNjk0NjgiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzQwOTU3MjcxLCJpYXQiOjE3NDA5NTM2NzEsImVtYW... (truncated)
-[2025-03-02T22:14:30.862Z] Registration successful for new user
-[2025-03-02T22:14:30.863Z] Sending GET request to /auth/me
-[2025-03-02T22:14:31.399Z] Response status: 200
-[2025-03-02T22:14:31.400Z] Response data: {"success":true,"data":{"user":{"_id":"67c4d846ceaf1bf4dc3e1f5f","supabaseId":"064bc30a-20cf-4843-b852-76272a169468","fullName":"Test User","email":"test2564@university.edu.ng","institution":"University of Lagos","department":"Computer Science","level":"300","walletBalance":0,"financialLiteracyScore":0,"createdAt":"2025-03-02T22:14:30.610Z","updatedAt":"2025-03-02T22:14:30.610Z","__v":0}}}
-[2025-03-02T22:14:31.401Z] User ID: 67c4d846ceaf1bf4dc3e1f5f
-[2025-03-02T22:14:31.402Z] Test 'authenticate' completed successfully in 1849ms
-[2025-03-02T22:14:31.404Z] Waiting 1000ms before next test...
+[2025-03-02T22:28:41.519Z] Using test user with email: test9366@university.edu.ng
+[2025-03-02T22:28:41.520Z] Sending POST request to /auth/register with data: {"email":"test9366@university.edu.ng","password":"Password123!","fullName":"Test User","institution":"University of Lagos","department":"Computer Science","level":"300"}
+[2025-03-02T22:28:43.967Z] Response status: 201
+[2025-03-02T22:28:43.969Z] Response data: {"success":true,"message":"User registered successfully","data":{"user":{"id":"67c4db9b54dd36a92b16d059","fullName":"Test User","email":"test9366@university.edu.ng","institution":"University of Lagos"},"token":"eyJhbGciOiJIUzI1NiIsImtpZCI6IktreHEvc0txYUU1aStnQnAiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2V5ZWNzdWZvb3FrZmZsbXVramh5LnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiIwNDg5OGYxYi1jZjA0LTQ3NDctYjgzMS03YWQ0OWJlMTIwZjciLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzQwOTU4MTI0LCJpYXQiOjE3NDA5NTQ1MjQsImVtYW... (truncated)
+[2025-03-02T22:28:43.970Z] Registration successful for new user
+[2025-03-02T22:28:43.971Z] Sending GET request to /auth/me
+[2025-03-02T22:28:44.388Z] Response status: 200
+[2025-03-02T22:28:44.389Z] Response data: {"success":true,"data":{"user":{"_id":"67c4db9b54dd36a92b16d059","supabaseId":"04898f1b-cf04-4747-b831-7ad49be120f7","fullName":"Test User","email":"test9366@university.edu.ng","institution":"University of Lagos","department":"Computer Science","level":"300","walletBalance":0,"financialLiteracyScore":0,"createdAt":"2025-03-02T22:28:43.782Z","updatedAt":"2025-03-02T22:28:43.782Z","__v":0}}}
+[2025-03-02T22:28:44.390Z] User ID: 67c4db9b54dd36a92b16d059
+[2025-03-02T22:28:44.391Z] Test 'authenticate' completed successfully in 2872ms
+[2025-03-02T22:28:44.392Z] Waiting 1000ms before next test...
 
 ================================================================================
-[2025-03-02T22:14:32.405Z] Running test: walletBasics
+[2025-03-02T22:28:45.405Z] Running test: walletBasics
 ================================================================================
 
-[2025-03-02T22:14:32.407Z] Sending GET request to /wallet
-[2025-03-02T22:14:33.705Z] Response status: 200
-[2025-03-02T22:14:33.706Z] Response data: {"success":true,"data":{"wallet":{"userId":"67c4d846ceaf1bf4dc3e1f5f","bankName":"Squad Microfinance Bank","balance":0,"isActive":true,"_id":"67c4d849ceaf1bf4dc3e1f64","createdAt":"2025-03-02T22:14:33.195Z","updatedAt":"2025-03-02T22:14:33.195Z","__v":0},"recentTransactions":[]}}
-[2025-03-02T22:14:33.707Z] Initial wallet balance: 0
-[2025-03-02T22:14:33.708Z] Test 'walletBasics' completed successfully in 1301ms
-[2025-03-02T22:14:33.709Z] Waiting 1000ms before next test...
+[2025-03-02T22:28:45.407Z] Sending GET request to /wallet
+[2025-03-02T22:28:46.353Z] Response status: 200
+[2025-03-02T22:28:46.354Z] Response data: {"success":true,"data":{"wallet":{"userId":"67c4db9b54dd36a92b16d059","bankName":"Squad Microfinance Bank","balance":0,"isActive":true,"_id":"67c4db9d54dd36a92b16d05e","createdAt":"2025-03-02T22:28:45.983Z","updatedAt":"2025-03-02T22:28:45.983Z","__v":0},"recentTransactions":[]}}
+[2025-03-02T22:28:46.356Z] Initial wallet balance: 0
+[2025-03-02T22:28:46.356Z] Test 'walletBasics' completed successfully in 949ms
+[2025-03-02T22:28:46.357Z] Waiting 1000ms before next test...
 
 ================================================================================
-[2025-03-02T22:14:34.711Z] Running test: createVirtualAccount
+[2025-03-02T22:28:47.369Z] Running test: createVirtualAccount
 ================================================================================
 
-[2025-03-02T22:14:34.712Z] Sending POST request to /wallet/virtual-account with data: {}
-[2025-03-02T22:14:39.743Z] Response status: 200
-[2025-03-02T22:14:39.744Z] Response data: {"success":true,"message":"Virtual account created successfully","data":{"accountNumber":"3857834185","accountName":"Test User","bankName":"Squad Microfinance Bank"}}
-[2025-03-02T22:14:39.746Z] Virtual account created: 3857834185
-[2025-03-02T22:14:39.747Z] Test 'createVirtualAccount' completed successfully in 5035ms
-[2025-03-02T22:14:39.747Z] Waiting 1000ms before next test...
+[2025-03-02T22:28:47.371Z] Sending POST request to /wallet/virtual-account with data: {}
+[2025-03-02T22:28:49.536Z] Response status: 422
+[2025-03-02T22:28:49.537Z] Response data: {"success":false,"error":"Merchant has reached account opening limit, please contact habaripay support","stack":"Error: Merchant has reached account opening limit, please contact habaripay support\n    at VirtualAccountService.<anonymous> (C:\\Users\\USER\\Desktop\\microfund-backend\\src\\services\\virtualAccount.service.ts:119:15)\n    at Generator.throw (<anonymous>)\n    at rejected (C:\\Users\\USER\\Desktop\\microfund-backend\\src\\services\\virtualAccount.service.ts:6:65)\n    at processTic... (truncated)
+[2025-03-02T22:28:49.538Z] Virtual account creation failed, this may be expected if already exists
+[2025-03-02T22:28:49.539Z] Sending GET request to /wallet
+[2025-03-02T22:28:50.358Z] Response status: 200
+[2025-03-02T22:28:50.359Z] Response data: {"success":true,"data":{"wallet":{"_id":"67c4db9d54dd36a92b16d05e","userId":"67c4db9b54dd36a92b16d059","bankName":"Squad Microfinance Bank","balance":0,"isActive":true,"createdAt":"2025-03-02T22:28:45.983Z","updatedAt":"2025-03-02T22:28:45.983Z","__v":0},"recentTransactions":[]}}
+[2025-03-02T22:28:50.360Z] ERROR: Failed to create or retrieve virtual account
+[2025-03-02T22:28:50.361Z] Test 'createVirtualAccount' skipped
+[2025-03-02T22:28:50.362Z] Waiting 1000ms before next test...
 
 ================================================================================
-[2025-03-02T22:14:40.755Z] Running test: deposit
+[2025-03-02T22:28:51.369Z] Running test: deposit
 ================================================================================
 
-[2025-03-02T22:14:40.757Z] Sending POST request to /wallet/deposit with data: {"amount":1000}
-[2025-03-02T22:14:42.700Z] Response status: 200
-[2025-03-02T22:14:42.702Z] Response data: {"success":true,"data":{"reference":"MF-DEP-1740953681942-67c4d","checkoutUrl":"http://localhost:3000/mock-payment/MF-DEP-1740953681942-67c4d?amount=1000","message":"Deposit initiated. Please complete payment."}}
-[2025-03-02T22:14:42.703Z] Deposit initiated with reference: MF-DEP-1740953681942-67c4d
-[2025-03-02T22:14:42.703Z] Checkout URL: http://localhost:3000/mock-payment/MF-DEP-1740953681942-67c4d?amount=1000
-[2025-03-02T22:14:42.704Z] Sending GET request to /wallet/deposit/MF-DEP-1740953681942-67c4d
-[2025-03-02T22:14:45.567Z] Response status: 200
-[2025-03-02T22:14:45.568Z] Response data: {"success":true,"message":"Payment verified successfully","data":{"transaction":{"_id":"67c4d852ceaf1bf4dc3e1f6d","userId":"67c4d846ceaf1bf4dc3e1f5f","type":"deposit","amount":1000,"fee":0,"status":"completed","reference":"MF-DEP-1740953681942-67c4d","description":"Wallet deposit","metadata":{"checkoutUrl":"http://localhost:3000/mock-payment/MF-DEP-1740953681942-67c4d?amount=1000"},"createdAt":"2025-03-02T22:14:42.451Z","updatedAt":"2025-03-02T22:14:44.002Z","__v":0}}}
-[2025-03-02T22:14:45.569Z] Sending GET request to /wallet
-[2025-03-02T22:14:46.553Z] Response status: 200
-[2025-03-02T22:14:46.554Z] Response data: {"success":true,"data":{"wallet":{"_id":"67c4d849ceaf1bf4dc3e1f64","userId":"67c4d846ceaf1bf4dc3e1f5f","bankName":"Squad Microfinance Bank","balance":1000,"isActive":true,"createdAt":"2025-03-02T22:14:33.195Z","updatedAt":"2025-03-02T22:14:44.524Z","__v":0,"accountName":"Test User","accountNumber":"3857834185","squadVirtualAccountId":"MF-67c4d8"},"recentTransactions":[{"_id":"67c4d852ceaf1bf4dc3e1f6d","userId":"67c4d846ceaf1bf4dc3e1f5f","type":"deposit","amount":1000,"fee":0,"status":"completed"... (truncated)
-[2025-03-02T22:14:46.556Z] Updated wallet balance: 1000 (was 0)
-[2025-03-02T22:14:46.556Z] Deposit successful - balance increased
-[2025-03-02T22:14:46.557Z] Test 'deposit' completed successfully in 5800ms
-[2025-03-02T22:14:46.559Z] Waiting 1000ms before next test...
+[2025-03-02T22:28:51.372Z] Sending POST request to /wallet/deposit with data: {"amount":1000}
+[2025-03-02T22:28:52.870Z] Response status: 200
+[2025-03-02T22:28:52.871Z] Response data: {"success":true,"data":{"reference":"MF-DEP-1740954531925-67c4d","checkoutUrl":"https://sandbox-pay.squadco.com/MF-DEP-1740954531925-67c4d","message":"Deposit initiated. Please complete payment."}}
+[2025-03-02T22:28:52.873Z] Deposit initiated with reference: MF-DEP-1740954531925-67c4d
+[2025-03-02T22:28:52.874Z] Checkout URL: https://sandbox-pay.squadco.com/MF-DEP-1740954531925-67c4d
+[2025-03-02T22:28:52.875Z] Sending GET request to /wallet/deposit/MF-DEP-1740954531925-67c4d
+[2025-03-02T22:28:54.058Z] Response status: 200
+[2025-03-02T22:28:54.059Z] Response data: {"success":false,"message":"Payment verification failed","data":{"transaction":{"_id":"67c4dba454dd36a92b16d069","userId":"67c4db9b54dd36a92b16d059","type":"deposit","amount":1000,"fee":0,"status":"failed","reference":"MF-DEP-1740954531925-67c4d","description":"Wallet deposit","metadata":{"checkoutUrl":"https://sandbox-pay.squadco.com/MF-DEP-1740954531925-67c4d"},"createdAt":"2025-03-02T22:28:52.693Z","updatedAt":"2025-03-02T22:28:53.888Z","__v":0}}}
+[2025-03-02T22:28:54.061Z] ERROR: Test 'deposit' failed: Failed to verify deposit
+[2025-03-02T22:28:54.062Z] ERROR: Stack trace: Error: Failed to verify deposit
+    at deposit (C:\Users\USER\Desktop\microfund-backend\tests\comprehensiveTest.js:329:13)
+    at async runTest (C:\Users\USER\Desktop\microfund-backend\tests\comprehensiveTest.js:185:20)
+    at async runTests (C:\Users\USER\Desktop\microfund-backend\tests\comprehensiveTest.js:1010:26)
+[2025-03-02T22:28:54.063Z] Waiting 1000ms before next test...
 
 ================================================================================
-[2025-03-02T22:14:47.564Z] Running test: paymentLink
+[2025-03-02T22:28:55.071Z] Running test: paymentLink
 ================================================================================
 
-[2025-03-02T22:14:47.566Z] Sending POST request to /payment-links with data: {"amount":2000,"description":"Test payment link"}
-[2025-03-02T22:14:48.852Z] Response status: 500
-[2025-03-02T22:14:48.853Z] Response data: {"success":false,"error":"Error creating payment link: Transaction validation failed: type: `payment_link` is not a valid enum value for path `type`.","stack":"Error: Error creating payment link: Transaction validation failed: type: `payment_link` is not a valid enum value for path `type`.\n    at PaymentLinkService.<anonymous> (C:\\Users\\USER\\Desktop\\microfund-backend\\src\\services\\payment-link.service.ts:67:11)\n    at Generator.throw (<anonymous>)\n    at rejected (C:\\Users\\USER\\Deskt... (truncated)
-[2025-03-02T22:14:48.854Z] ERROR: Test 'paymentLink' failed: Failed to create payment link
-[2025-03-02T22:14:48.855Z] ERROR: Stack trace: Error: Failed to create payment link
+[2025-03-02T22:28:55.074Z] Sending POST request to /payment-links with data: {"amount":2000,"description":"Test payment link"}
+[2025-03-02T22:28:56.794Z] Response status: 500
+[2025-03-02T22:28:56.795Z] Response data: {"success":false,"error":"Error creating payment link: Failed to create payment link","stack":"Error: Error creating payment link: Failed to create payment link\n    at PaymentLinkService.<anonymous> (C:\\Users\\USER\\Desktop\\microfund-backend\\src\\services\\payment-link.service.ts:67:11)\n    at Generator.next (<anonymous>)\n    at fulfilled (C:\\Users\\USER\\Desktop\\microfund-backend\\src\\services\\payment-link.service.ts:5:58)\n    at processTicksAndRejections (node:internal/process/task_... (truncated)
+[2025-03-02T22:28:56.796Z] ERROR: Test 'paymentLink' failed: Failed to create payment link
+[2025-03-02T22:28:56.796Z] ERROR: Stack trace: Error: Failed to create payment link
     at paymentLink (C:\Users\USER\Desktop\microfund-backend\tests\comprehensiveTest.js:360:13)
     at async runTest (C:\Users\USER\Desktop\microfund-backend\tests\comprehensiveTest.js:185:20)
-    at async runTests (C:\Users\USER\Desktop\microfund-backend\tests\comprehensiveTest.js:1003:26)
-[2025-03-02T22:14:48.856Z] Waiting 1000ms before next test...
+    at async runTests (C:\Users\USER\Desktop\microfund-backend\tests\comprehensiveTest.js:1010:26)
+[2025-03-02T22:28:56.797Z] Waiting 1000ms before next test...
 
 ================================================================================
-[2025-03-02T22:14:49.870Z] Running test: banks
+[2025-03-02T22:28:57.802Z] Running test: banks
 ================================================================================
 
-[2025-03-02T22:14:49.872Z] Sending GET request to /banks
-[2025-03-02T22:14:50.150Z] Response status: 200
-[2025-03-02T22:14:50.151Z] Response data: {"success":true,"data":[{"_id":"67c0e69a73cbc70ccfc04772","code":"000014","name":"Access Bank","isActive":true,"__v":0,"createdAt":"2025-02-27T22:26:34.579Z","updatedAt":"2025-02-27T22:26:34.579Z"},{"_id":"67c0e69a73cbc70ccfc0476d","code":"000009","name":"Citibank","isActive":true,"__v":0,"createdAt":"2025-02-27T22:26:34.578Z","updatedAt":"2025-02-27T22:26:34.578Z"},{"_id":"67c0e69a73cbc70ccfc04769","code":"000005","name":"Diamond Bank","isActive":true,"__v":0,"createdAt":"2025-02-27T22:26:34.57... (truncated)
-[2025-03-02T22:14:50.152Z] Retrieved 17 banks
-[2025-03-02T22:14:50.153Z] Test 'banks' completed successfully in 281ms
-[2025-03-02T22:14:50.153Z] Waiting 1000ms before next test...
+[2025-03-02T22:28:57.804Z] Sending GET request to /banks
+[2025-03-02T22:28:57.991Z] Response status: 200
+[2025-03-02T22:28:57.992Z] Response data: {"success":true,"data":[{"_id":"67c0e69a73cbc70ccfc04772","code":"000014","name":"Access Bank","isActive":true,"__v":0,"createdAt":"2025-02-27T22:26:34.579Z","updatedAt":"2025-02-27T22:26:34.579Z"},{"_id":"67c0e69a73cbc70ccfc0476d","code":"000009","name":"Citibank","isActive":true,"__v":0,"createdAt":"2025-02-27T22:26:34.578Z","updatedAt":"2025-02-27T22:26:34.578Z"},{"_id":"67c0e69a73cbc70ccfc04769","code":"000005","name":"Diamond Bank","isActive":true,"__v":0,"createdAt":"2025-02-27T22:26:34.57... (truncated)
+[2025-03-02T22:28:57.993Z] Retrieved 17 banks
+[2025-03-02T22:28:57.994Z] Test 'banks' completed successfully in 190ms
+[2025-03-02T22:28:57.995Z] Waiting 1000ms before next test...
 
 ================================================================================
-[2025-03-02T22:14:51.155Z] Running test: withdraw
+[2025-03-02T22:28:59.004Z] Running test: withdraw
 ================================================================================
 
-[2025-03-02T22:14:51.157Z] ERROR: Test 'withdraw' failed: Cannot read properties of undefined (reading 'success')
-[2025-03-02T22:14:51.158Z] ERROR: Stack trace: TypeError: Cannot read properties of undefined (reading 'success')
-    at withdraw (C:\Users\USER\Desktop\microfund-backend\tests\comprehensiveTest.js:424:27)
-    at runTest (C:\Users\USER\Desktop\microfund-backend\tests\comprehensiveTest.js:185:26)
-    at async runTests (C:\Users\USER\Desktop\microfund-backend\tests\comprehensiveTest.js:1003:26)
-[2025-03-02T22:14:51.159Z] Waiting 1000ms before next test...
+[2025-03-02T22:28:59.007Z] ERROR: Insufficient balance for withdrawal test. Minimum required: 500
+[2025-03-02T22:28:59.008Z] Skipping withdrawal test
+[2025-03-02T22:28:59.009Z] Test 'withdraw' skipped
+[2025-03-02T22:28:59.010Z] Waiting 1000ms before next test...
 
 ================================================================================
-[2025-03-02T22:14:52.170Z] Running test: transactions
+[2025-03-02T22:29:00.017Z] Running test: transactions
 ================================================================================
 
-[2025-03-02T22:14:52.173Z] Sending GET request to /wallet/transactions
-[2025-03-02T22:14:53.537Z] Response status: 200
-[2025-03-02T22:14:53.539Z] Response data: {"success":true,"data":{"transactions":[{"_id":"67c4d852ceaf1bf4dc3e1f6d","userId":"67c4d846ceaf1bf4dc3e1f5f","type":"deposit","amount":1000,"fee":0,"status":"completed","reference":"MF-DEP-1740953681942-67c4d","description":"Wallet deposit","metadata":{"checkoutUrl":"http://localhost:3000/mock-payment/MF-DEP-1740953681942-67c4d?amount=1000"},"createdAt":"2025-03-02T22:14:42.451Z","updatedAt":"2025-03-02T22:14:44.002Z","__v":0}],"pagination":{"page":1,"limit":10,"total":1,"pages":1}}}
-[2025-03-02T22:14:53.540Z] Retrieved 1 transactions
-[2025-03-02T22:14:53.541Z] Transaction types summary: {"deposit":1}
-[2025-03-02T22:14:53.542Z] Sending GET request to /wallet/transactions?type=deposit
-[2025-03-02T22:14:54.538Z] Response status: 200
-[2025-03-02T22:14:54.539Z] Response data: {"success":true,"data":{"transactions":[{"_id":"67c4d852ceaf1bf4dc3e1f6d","userId":"67c4d846ceaf1bf4dc3e1f5f","type":"deposit","amount":1000,"fee":0,"status":"completed","reference":"MF-DEP-1740953681942-67c4d","description":"Wallet deposit","metadata":{"checkoutUrl":"http://localhost:3000/mock-payment/MF-DEP-1740953681942-67c4d?amount=1000"},"createdAt":"2025-03-02T22:14:42.451Z","updatedAt":"2025-03-02T22:14:44.002Z","__v":0}],"pagination":{"page":1,"limit":10,"total":1,"pages":1}}}
-[2025-03-02T22:14:54.540Z] Retrieved 1 deposit transactions with filter
-[2025-03-02T22:14:54.541Z] Test 'transactions' completed successfully in 2368ms
-[2025-03-02T22:14:54.542Z] Waiting 1000ms before next test...
+[2025-03-02T22:29:00.021Z] Sending GET request to /wallet/transactions
+[2025-03-02T22:29:01.104Z] Response status: 200
+[2025-03-02T22:29:01.105Z] Response data: {"success":true,"data":{"transactions":[{"_id":"67c4dba454dd36a92b16d069","userId":"67c4db9b54dd36a92b16d059","type":"deposit","amount":1000,"fee":0,"status":"failed","reference":"MF-DEP-1740954531925-67c4d","description":"Wallet deposit","metadata":{"checkoutUrl":"https://sandbox-pay.squadco.com/MF-DEP-1740954531925-67c4d"},"createdAt":"2025-03-02T22:28:52.693Z","updatedAt":"2025-03-02T22:28:53.888Z","__v":0}],"pagination":{"page":1,"limit":10,"total":1,"pages":1}}}
+[2025-03-02T22:29:01.106Z] Retrieved 1 transactions
+[2025-03-02T22:29:01.107Z] Transaction types summary: {"deposit":1}
+[2025-03-02T22:29:01.108Z] Sending GET request to /wallet/transactions?type=deposit
+[2025-03-02T22:29:01.857Z] Response status: 200
+[2025-03-02T22:29:01.858Z] Response data: {"success":true,"data":{"transactions":[{"_id":"67c4dba454dd36a92b16d069","userId":"67c4db9b54dd36a92b16d059","type":"deposit","amount":1000,"fee":0,"status":"failed","reference":"MF-DEP-1740954531925-67c4d","description":"Wallet deposit","metadata":{"checkoutUrl":"https://sandbox-pay.squadco.com/MF-DEP-1740954531925-67c4d"},"createdAt":"2025-03-02T22:28:52.693Z","updatedAt":"2025-03-02T22:28:53.888Z","__v":0}],"pagination":{"page":1,"limit":10,"total":1,"pages":1}}}
+[2025-03-02T22:29:01.860Z] Retrieved 1 deposit transactions with filter
+[2025-03-02T22:29:01.861Z] Test 'transactions' completed successfully in 1841ms
+[2025-03-02T22:29:01.862Z] Waiting 1000ms before next test...
 
 ================================================================================
-[2025-03-02T22:14:55.554Z] Running test: valueAddedServices
+[2025-03-02T22:29:02.869Z] Running test: valueAddedServices
 ================================================================================
 
-[2025-03-02T22:14:55.556Z] Sending GET request to /vas/data-bundles?network=MTN
-[2025-03-02T22:15:02.634Z] Response status: 500
-[2025-03-02T22:15:02.635Z] Response data: {"success":false,"error":"Error fetching data bundles: Not Found","stack":"Error: Error fetching data bundles: Not Found\n    at VASService.<anonymous> (C:\\Users\\USER\\Desktop\\microfund-backend\\src\\services\\vas.service.ts:168:11)\n    at Generator.throw (<anonymous>)\n    at rejected (C:\\Users\\USER\\Desktop\\microfund-backend\\src\\services\\vas.service.ts:6:65)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)"}
-[2025-03-02T22:15:02.636Z] ERROR: VAS data bundles endpoint failed, this service might not be enabled
-[2025-03-02T22:15:02.636Z] Test 'valueAddedServices' skipped
-[2025-03-02T22:15:02.637Z] Waiting 1000ms before next test...
+[2025-03-02T22:29:02.871Z] Sending GET request to /vas/data-bundles?network=MTN
+[2025-03-02T22:29:08.477Z] Response status: 500
+[2025-03-02T22:29:08.478Z] Response data: {"success":false,"error":"Error fetching data bundles: Request failed with status code 404","stack":"Error: Error fetching data bundles: Request failed with status code 404\n    at VASService.<anonymous> (C:\\Users\\USER\\Desktop\\microfund-backend\\src\\services\\vas.service.ts:188:11)\n    at Generator.throw (<anonymous>)\n    at rejected (C:\\Users\\USER\\Desktop\\microfund-backend\\src\\services\\vas.service.ts:6:65)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)... (truncated)
+[2025-03-02T22:29:08.479Z] ERROR: VAS data bundles endpoint failed, this service might not be enabled
+[2025-03-02T22:29:08.480Z] Test 'valueAddedServices' skipped
+[2025-03-02T22:29:08.481Z] Waiting 1000ms before next test...
 
 ================================================================================
-[2025-03-02T22:15:03.653Z] Running test: ussdPayment
+[2025-03-02T22:29:09.494Z] Running test: ussdPayment
 ================================================================================
 
-[2025-03-02T22:15:03.655Z] Sending GET request to /ussd/banks
-[2025-03-02T22:15:03.668Z] Response status: 200
-[2025-03-02T22:15:03.668Z] Response data: {"success":true,"data":[{"name":"Access (Diamond) Bank","code":"063","ussdCode":"426"},{"name":"Access Bank","code":"044","ussdCode":"901"},{"name":"EcoBank","code":"050","ussdCode":"326"},{"name":"First City Monument Bank (FCMB)","code":"214","ussdCode":"329"},{"name":"Fidelity Bank","code":"070","ussdCode":"770"},{"name":"First Bank","code":"011","ussdCode":"894"},{"name":"Guaranty Trust Bank","code":"058","ussdCode":"737"},{"name":"Heritage Bank","code":"030","ussdCode":"745"},{"name":"Keysto... (truncated)
-[2025-03-02T22:15:03.669Z] Retrieved 18 USSD supported banks
-[2025-03-02T22:15:03.670Z] Skipping actual USSD payment initiation
-[2025-03-02T22:15:03.671Z] Test 'ussdPayment' completed successfully in 16ms
-[2025-03-02T22:15:03.671Z] Waiting 1000ms before next test...
+[2025-03-02T22:29:09.496Z] Sending GET request to /ussd/banks
+[2025-03-02T22:29:09.507Z] Response status: 200
+[2025-03-02T22:29:09.508Z] Response data: {"success":true,"data":[{"name":"Access (Diamond) Bank","code":"063","ussdCode":"426"},{"name":"Access Bank","code":"044","ussdCode":"901"},{"name":"EcoBank","code":"050","ussdCode":"326"},{"name":"First City Monument Bank (FCMB)","code":"214","ussdCode":"329"},{"name":"Fidelity Bank","code":"070","ussdCode":"770"},{"name":"First Bank","code":"011","ussdCode":"894"},{"name":"Guaranty Trust Bank","code":"058","ussdCode":"737"},{"name":"Heritage Bank","code":"030","ussdCode":"745"},{"name":"Keysto... (truncated)
+[2025-03-02T22:29:09.510Z] Retrieved 18 USSD supported banks
+[2025-03-02T22:29:09.512Z] Skipping actual USSD payment initiation
+[2025-03-02T22:29:09.513Z] Test 'ussdPayment' completed successfully in 18ms
+[2025-03-02T22:29:09.514Z] Waiting 1000ms before next test...
 
 ================================================================================
-[2025-03-02T22:15:04.673Z] Running test: createBusiness
+[2025-03-02T22:29:10.529Z] Running test: createBusiness
 ================================================================================
 
-[2025-03-02T22:15:04.675Z] Sending POST request to /business with data: {"name":"Test Business","description":"This is a test business created by automated testing","category":"technology","fundingGoal":10000,"expectedReturnRate":15,"duration":6,"location":"Lagos, Nigeria","contactEmail":"test2564@university.edu.ng","contactPhone":"08012345678"}
-[2025-03-02T22:15:06.355Z] Response status: 201
-[2025-03-02T22:15:06.356Z] Response data: {"success":true,"message":"Business profile created successfully","data":{"owner":"67c4d846ceaf1bf4dc3e1f5f","name":"Test Business","description":"This is a test business created by automated testing","category":"technology","fundingGoal":10000,"raisedAmount":0,"expectedReturnRate":15,"duration":6,"hasProducts":false,"location":"Lagos, Nigeria","contactEmail":"test2564@university.edu.ng","contactPhone":"08012345678","status":"draft","verificationStatus":"pending","_id":"67c4d86aceaf1bf4dc3e1f86"... (truncated)
-[2025-03-02T22:15:06.357Z] Business created with ID: 67c4d86aceaf1bf4dc3e1f86
-[2025-03-02T22:15:06.358Z] Sending POST request to /business/67c4d86aceaf1bf4dc3e1f86/publish with data: {}
-[2025-03-02T22:15:07.976Z] Response status: 200
-[2025-03-02T22:15:07.977Z] Response data: {"success":true,"message":"Business published successfully","data":{"_id":"67c4d86aceaf1bf4dc3e1f86","owner":"67c4d846ceaf1bf4dc3e1f5f","name":"Test Business","description":"This is a test business created by automated testing","category":"technology","fundingGoal":10000,"raisedAmount":0,"expectedReturnRate":15,"duration":6,"hasProducts":false,"location":"Lagos, Nigeria","contactEmail":"test2564@university.edu.ng","contactPhone":"08012345678","status":"active","verificationStatus":"pending","cre... (truncated)
-[2025-03-02T22:15:07.979Z] Business published successfully
-[2025-03-02T22:15:07.980Z] Sending GET request to /business/67c4d86aceaf1bf4dc3e1f86
-[2025-03-02T22:15:09.056Z] Response status: 200
-[2025-03-02T22:15:09.057Z] Response data: {"success":true,"data":{"business":{"_id":"67c4d86aceaf1bf4dc3e1f86","owner":{"_id":"67c4d846ceaf1bf4dc3e1f5f","fullName":"Test User","email":"test2564@university.edu.ng","institution":"University of Lagos","department":"Computer Science","level":"300"},"name":"Test Business","description":"This is a test business created by automated testing","category":"technology","fundingGoal":10000,"raisedAmount":0,"expectedReturnRate":15,"duration":6,"hasProducts":false,"location":"Lagos, Nigeria","contact... (truncated)
-[2025-03-02T22:15:09.058Z] Retrieved business details successfully
-[2025-03-02T22:15:09.059Z] Test 'createBusiness' completed successfully in 4384ms
-[2025-03-02T22:15:09.059Z] Waiting 1000ms before next test...
+[2025-03-02T22:29:10.531Z] Sending POST request to /business with data: {"name":"Test Business","description":"This is a test business created by automated testing","category":"technology","fundingGoal":10000,"expectedReturnRate":15,"duration":6,"location":"Lagos, Nigeria","contactEmail":"test9366@university.edu.ng","contactPhone":"08012345678"}
+[2025-03-02T22:29:11.652Z] Response status: 201
+[2025-03-02T22:29:11.655Z] Response data: {"success":true,"message":"Business profile created successfully","data":{"owner":"67c4db9b54dd36a92b16d059","name":"Test Business","description":"This is a test business created by automated testing","category":"technology","fundingGoal":10000,"raisedAmount":0,"expectedReturnRate":15,"duration":6,"hasProducts":false,"location":"Lagos, Nigeria","contactEmail":"test9366@university.edu.ng","contactPhone":"08012345678","status":"draft","verificationStatus":"pending","_id":"67c4dbb754dd36a92b16d07a"... (truncated)
+[2025-03-02T22:29:11.656Z] Business created with ID: 67c4dbb754dd36a92b16d07a
+[2025-03-02T22:29:11.657Z] Sending POST request to /business/67c4dbb754dd36a92b16d07a/publish with data: {}
+[2025-03-02T22:29:12.396Z] Response status: 200
+[2025-03-02T22:29:12.398Z] Response data: {"success":true,"message":"Business published successfully","data":{"_id":"67c4dbb754dd36a92b16d07a","owner":"67c4db9b54dd36a92b16d059","name":"Test Business","description":"This is a test business created by automated testing","category":"technology","fundingGoal":10000,"raisedAmount":0,"expectedReturnRate":15,"duration":6,"hasProducts":false,"location":"Lagos, Nigeria","contactEmail":"test9366@university.edu.ng","contactPhone":"08012345678","status":"active","verificationStatus":"pending","cre... (truncated)
+[2025-03-02T22:29:12.399Z] Business published successfully
+[2025-03-02T22:29:12.400Z] Sending GET request to /business/67c4dbb754dd36a92b16d07a
+[2025-03-02T22:29:13.053Z] Response status: 200
+[2025-03-02T22:29:13.054Z] Response data: {"success":true,"data":{"business":{"_id":"67c4dbb754dd36a92b16d07a","owner":{"_id":"67c4db9b54dd36a92b16d059","fullName":"Test User","email":"test9366@university.edu.ng","institution":"University of Lagos","department":"Computer Science","level":"300"},"name":"Test Business","description":"This is a test business created by automated testing","category":"technology","fundingGoal":10000,"raisedAmount":0,"expectedReturnRate":15,"duration":6,"hasProducts":false,"location":"Lagos, Nigeria","contact... (truncated)
+[2025-03-02T22:29:13.055Z] Retrieved business details successfully
+[2025-03-02T22:29:13.055Z] Test 'createBusiness' completed successfully in 2524ms
+[2025-03-02T22:29:13.056Z] Waiting 1000ms before next test...
 
 ================================================================================
-[2025-03-02T22:15:10.065Z] Running test: createProduct
+[2025-03-02T22:29:14.060Z] Running test: createProduct
 ================================================================================
 
-[2025-03-02T22:15:10.068Z] Sending POST request to /business/67c4d86aceaf1bf4dc3e1f86/products with data: {"name":"Test Product","description":"This is a test product created by automated testing","price":1000,"category":"Software"}
-[2025-03-02T22:15:11.530Z] Response status: 201
-[2025-03-02T22:15:11.531Z] Response data: {"success":true,"message":"Product added successfully","data":{"businessId":"67c4d86aceaf1bf4dc3e1f86","name":"Test Product","description":"This is a test product created by automated testing","price":1000,"images":[],"inStock":true,"category":"Software","_id":"67c4d86fceaf1bf4dc3e1f91","createdAt":"2025-03-02T22:15:11.006Z","updatedAt":"2025-03-02T22:15:11.006Z","__v":0}}
-[2025-03-02T22:15:11.532Z] Product created with ID: 67c4d86fceaf1bf4dc3e1f91
-[2025-03-02T22:15:11.533Z] Sending GET request to /business/67c4d86aceaf1bf4dc3e1f86/products
-[2025-03-02T22:15:12.886Z] Response status: 200
-[2025-03-02T22:15:12.887Z] Response data: {"success":true,"data":{"business":{"_id":"67c4d86aceaf1bf4dc3e1f86","owner":{"_id":"67c4d846ceaf1bf4dc3e1f5f","fullName":"Test User","email":"test2564@university.edu.ng","institution":"University of Lagos"},"name":"Test Business","description":"This is a test business created by automated testing","category":"technology","fundingGoal":10000,"raisedAmount":0,"expectedReturnRate":15,"duration":6,"hasProducts":true,"location":"Lagos, Nigeria","contactEmail":"test2564@university.edu.ng","contactPho... (truncated)
-[2025-03-02T22:15:12.888Z] Retrieved 1 products
-[2025-03-02T22:15:12.888Z] Sending GET request to /business/products/67c4d86fceaf1bf4dc3e1f91
-[2025-03-02T22:15:15.176Z] Response status: 200
-[2025-03-02T22:15:15.177Z] Response data: {"success":true,"data":{"product":{"_id":"67c4d86fceaf1bf4dc3e1f91","businessId":"67c4d86aceaf1bf4dc3e1f86","name":"Test Product","description":"This is a test product created by automated testing","price":1000,"images":[],"inStock":true,"category":"Software","createdAt":"2025-03-02T22:15:11.006Z","updatedAt":"2025-03-02T22:15:11.006Z","__v":0},"business":{"_id":"67c4d86aceaf1bf4dc3e1f86","owner":{"_id":"67c4d846ceaf1bf4dc3e1f5f","fullName":"Test User","email":"test2564@university.edu.ng","insti... (truncated)
-[2025-03-02T22:15:15.178Z] Retrieved product details successfully
-[2025-03-02T22:15:15.179Z] Test 'createProduct' completed successfully in 5111ms
-[2025-03-02T22:15:15.180Z] Waiting 1000ms before next test...
+[2025-03-02T22:29:14.062Z] Sending POST request to /business/67c4dbb754dd36a92b16d07a/products with data: {"name":"Test Product","description":"This is a test product created by automated testing","price":1000,"category":"Software"}
+[2025-03-02T22:29:14.996Z] Response status: 201
+[2025-03-02T22:29:14.997Z] Response data: {"success":true,"message":"Product added successfully","data":{"businessId":"67c4dbb754dd36a92b16d07a","name":"Test Product","description":"This is a test product created by automated testing","price":1000,"images":[],"inStock":true,"category":"Software","_id":"67c4dbba54dd36a92b16d085","createdAt":"2025-03-02T22:29:14.646Z","updatedAt":"2025-03-02T22:29:14.646Z","__v":0}}
+[2025-03-02T22:29:14.999Z] Product created with ID: 67c4dbba54dd36a92b16d085
+[2025-03-02T22:29:15.000Z] Sending GET request to /business/67c4dbb754dd36a92b16d07a/products
+[2025-03-02T22:29:15.713Z] Response status: 200
+[2025-03-02T22:29:15.714Z] Response data: {"success":true,"data":{"business":{"_id":"67c4dbb754dd36a92b16d07a","owner":{"_id":"67c4db9b54dd36a92b16d059","fullName":"Test User","email":"test9366@university.edu.ng","institution":"University of Lagos"},"name":"Test Business","description":"This is a test business created by automated testing","category":"technology","fundingGoal":10000,"raisedAmount":0,"expectedReturnRate":15,"duration":6,"hasProducts":true,"location":"Lagos, Nigeria","contactEmail":"test9366@university.edu.ng","contactPho... (truncated)
+[2025-03-02T22:29:15.715Z] Retrieved 1 products
+[2025-03-02T22:29:15.716Z] Sending GET request to /business/products/67c4dbba54dd36a92b16d085
+[2025-03-02T22:29:16.381Z] Response status: 200
+[2025-03-02T22:29:16.382Z] Response data: {"success":true,"data":{"product":{"_id":"67c4dbba54dd36a92b16d085","businessId":"67c4dbb754dd36a92b16d07a","name":"Test Product","description":"This is a test product created by automated testing","price":1000,"images":[],"inStock":true,"category":"Software","createdAt":"2025-03-02T22:29:14.646Z","updatedAt":"2025-03-02T22:29:14.646Z","__v":0},"business":{"_id":"67c4dbb754dd36a92b16d07a","owner":{"_id":"67c4db9b54dd36a92b16d059","fullName":"Test User","email":"test9366@university.edu.ng","insti... (truncated)
+[2025-03-02T22:29:16.383Z] Retrieved product details successfully
+[2025-03-02T22:29:16.384Z] Test 'createProduct' completed successfully in 2323ms
+[2025-03-02T22:29:16.385Z] Waiting 1000ms before next test...
 
 ================================================================================
-[2025-03-02T22:15:16.187Z] Running test: updateProduct
+[2025-03-02T22:29:17.400Z] Running test: updateProduct
 ================================================================================
 
-[2025-03-02T22:15:16.189Z] Sending PUT request to /business/products/67c4d86fceaf1bf4dc3e1f91 with data: {"price":1200,"description":"Updated description from automated testing"}
-[2025-03-02T22:15:21.440Z] Response status: 200
-[2025-03-02T22:15:21.441Z] Response data: {"success":true,"message":"Product updated successfully","data":{"_id":"67c4d86fceaf1bf4dc3e1f91","businessId":"67c4d86aceaf1bf4dc3e1f86","name":"Test Product","description":"Updated description from automated testing","price":1200,"images":[],"inStock":true,"category":"Software","createdAt":"2025-03-02T22:15:11.006Z","updatedAt":"2025-03-02T22:15:21.181Z","__v":0}}
-[2025-03-02T22:15:21.443Z] Product updated successfully
-[2025-03-02T22:15:21.444Z] Test 'updateProduct' completed successfully in 5255ms
-[2025-03-02T22:15:21.445Z] Waiting 1000ms before next test...
+[2025-03-02T22:29:17.403Z] Sending PUT request to /business/products/67c4dbba54dd36a92b16d085 with data: {"price":1200,"description":"Updated description from automated testing"}
+[2025-03-02T22:29:18.259Z] Response status: 200
+[2025-03-02T22:29:18.260Z] Response data: {"success":true,"message":"Product updated successfully","data":{"_id":"67c4dbba54dd36a92b16d085","businessId":"67c4dbb754dd36a92b16d07a","name":"Test Product","description":"Updated description from automated testing","price":1200,"images":[],"inStock":true,"category":"Software","createdAt":"2025-03-02T22:29:14.646Z","updatedAt":"2025-03-02T22:29:18.080Z","__v":0}}
+[2025-03-02T22:29:18.261Z] Product updated successfully
+[2025-03-02T22:29:18.262Z] Test 'updateProduct' completed successfully in 859ms
+[2025-03-02T22:29:18.263Z] Waiting 1000ms before next test...
 
 ================================================================================
-[2025-03-02T22:15:22.446Z] Running test: createBusinessUpdate
+[2025-03-02T22:29:19.265Z] Running test: createBusinessUpdate
 ================================================================================
 
-[2025-03-02T22:15:22.448Z] Sending POST request to /business/67c4d86aceaf1bf4dc3e1f86/updates with data: {"title":"Test Update","content":"This is a test update created by automated testing"}
-[2025-03-02T22:15:23.958Z] Response status: 201
-[2025-03-02T22:15:23.960Z] Response data: {"success":true,"message":"Business update added successfully","data":{"businessId":"67c4d86aceaf1bf4dc3e1f86","title":"Test Update","content":"This is a test update created by automated testing","images":[],"_id":"67c4d87bceaf1bf4dc3e1fa2","createdAt":"2025-03-02T22:15:23.713Z","updatedAt":"2025-03-02T22:15:23.713Z","__v":0}}
-[2025-03-02T22:15:23.961Z] Business update created successfully
-[2025-03-02T22:15:23.962Z] Test 'createBusinessUpdate' completed successfully in 1515ms
-[2025-03-02T22:15:23.963Z] Waiting 1000ms before next test...
+[2025-03-02T22:29:19.267Z] Sending POST request to /business/67c4dbb754dd36a92b16d07a/updates with data: {"title":"Test Update","content":"This is a test update created by automated testing"}
+[2025-03-02T22:29:20.008Z] Response status: 201
+[2025-03-02T22:29:20.009Z] Response data: {"success":true,"message":"Business update added successfully","data":{"businessId":"67c4dbb754dd36a92b16d07a","title":"Test Update","content":"This is a test update created by automated testing","images":[],"_id":"67c4dbbf54dd36a92b16d096","createdAt":"2025-03-02T22:29:19.837Z","updatedAt":"2025-03-02T22:29:19.837Z","__v":0}}
+[2025-03-02T22:29:20.010Z] Business update created successfully
+[2025-03-02T22:29:20.011Z] Test 'createBusinessUpdate' completed successfully in 744ms
+[2025-03-02T22:29:20.011Z] Waiting 1000ms before next test...
 
 ================================================================================
-[2025-03-02T22:15:24.975Z] Running test: investInBusiness
+[2025-03-02T22:29:21.023Z] Running test: investInBusiness
 ================================================================================
 
-[2025-03-02T22:15:24.977Z] Sending POST request to /business/67c4d86aceaf1bf4dc3e1f86/invest with data: {"amount":500}
-[2025-03-02T22:15:26.005Z] Response status: 400
-[2025-03-02T22:15:26.006Z] Response data: {"success":false,"error":"You cannot invest in your own business","stack":"Error: You cannot invest in your own business\n    at BusinessService.<anonymous> (C:\\Users\\USER\\Desktop\\microfund-backend\\src\\services\\business\\business.service.ts:293:15)\n    at Generator.next (<anonymous>)\n    at fulfilled (C:\\Users\\USER\\Desktop\\microfund-backend\\src\\services\\business\\business.service.ts:5:58)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)"}
-[2025-03-02T22:15:26.007Z] ERROR: Failed to invest in business, may be expected if own business
-[2025-03-02T22:15:26.008Z] Test 'investInBusiness' skipped
-[2025-03-02T22:15:26.009Z] Waiting 1000ms before next test...
+[2025-03-02T22:29:21.026Z] ERROR: No business ID or insufficient balance, skipping investment
+[2025-03-02T22:29:21.027Z] Test 'investInBusiness' skipped
+[2025-03-02T22:29:21.028Z] Waiting 1000ms before next test...
 
 ================================================================================
-[2025-03-02T22:15:27.013Z] Running test: createSavingsGroup
+[2025-03-02T22:29:22.044Z] Running test: createSavingsGroup
 ================================================================================
 
-[2025-03-02T22:15:27.015Z] Sending POST request to /savings/groups with data: {"name":"Test Savings Group","description":"This is a test savings group created by automated testing","targetAmount":10000,"contributionAmount":500,"frequency":"weekly","startDate":"2025-03-03T22:15:27.015Z","endDate":"2025-06-02T22:15:27.015Z"}
-[2025-03-02T22:15:28.001Z] Response status: 201
-[2025-03-02T22:15:28.002Z] Response data: {"success":true,"message":"Savings group created successfully","data":{"name":"Test Savings Group","description":"This is a test savings group created by automated testing","creator":"67c4d846ceaf1bf4dc3e1f5f","members":["67c4d846ceaf1bf4dc3e1f5f"],"targetAmount":10000,"contributionAmount":500,"frequency":"weekly","currentTotal":0,"startDate":"2025-03-03T22:15:27.015Z","endDate":"2025-06-02T22:15:27.015Z","isActive":true,"_id":"67c4d87fceaf1bf4dc3e1fa7","createdAt":"2025-03-02T22:15:27.490Z","up... (truncated)
-[2025-03-02T22:15:28.003Z] Savings group created with ID: 67c4d87fceaf1bf4dc3e1fa7
-[2025-03-02T22:15:28.004Z] Sending GET request to /savings/groups
-[2025-03-02T22:15:29.080Z] Response status: 200
-[2025-03-02T22:15:29.081Z] Response data: {"success":true,"data":{"groups":[{"_id":"67c4d87fceaf1bf4dc3e1fa7","name":"Test Savings Group","description":"This is a test savings group created by automated testing","creator":"67c4d846ceaf1bf4dc3e1f5f","members":["67c4d846ceaf1bf4dc3e1f5f"],"targetAmount":10000,"contributionAmount":500,"frequency":"weekly","currentTotal":0,"startDate":"2025-03-03T22:15:27.015Z","endDate":"2025-06-02T22:15:27.015Z","isActive":true,"createdAt":"2025-03-02T22:15:27.490Z","updatedAt":"2025-03-02T22:15:27.490Z",... (truncated)
-[2025-03-02T22:15:29.082Z] Retrieved 4 savings groups
-[2025-03-02T22:15:29.083Z] Sending GET request to /savings/my-groups
-[2025-03-02T22:15:30.357Z] Response status: 200
-[2025-03-02T22:15:30.358Z] Response data: {"success":true,"data":{"ownedGroups":[{"_id":"67c4d87fceaf1bf4dc3e1fa7","name":"Test Savings Group","description":"This is a test savings group created by automated testing","creator":"67c4d846ceaf1bf4dc3e1f5f","members":["67c4d846ceaf1bf4dc3e1f5f"],"targetAmount":10000,"contributionAmount":500,"frequency":"weekly","currentTotal":0,"startDate":"2025-03-03T22:15:27.015Z","endDate":"2025-06-02T22:15:27.015Z","isActive":true,"createdAt":"2025-03-02T22:15:27.490Z","updatedAt":"2025-03-02T22:15:27.4... (truncated)
-[2025-03-02T22:15:30.360Z] Retrieved user's savings groups
-[2025-03-02T22:15:30.361Z] Sending GET request to /savings/groups/67c4d87fceaf1bf4dc3e1fa7
-[2025-03-02T22:15:31.913Z] Response status: 200
-[2025-03-02T22:15:31.914Z] Response data: {"success":true,"data":{"group":{"_id":"67c4d87fceaf1bf4dc3e1fa7","name":"Test Savings Group","description":"This is a test savings group created by automated testing","creator":"67c4d846ceaf1bf4dc3e1f5f","members":["67c4d846ceaf1bf4dc3e1f5f"],"targetAmount":10000,"contributionAmount":500,"frequency":"weekly","currentTotal":0,"startDate":"2025-03-03T22:15:27.015Z","endDate":"2025-06-02T22:15:27.015Z","isActive":true,"createdAt":"2025-03-02T22:15:27.490Z","updatedAt":"2025-03-02T22:15:27.490Z","_... (truncated)
-[2025-03-02T22:15:31.915Z] Retrieved group details successfully
-[2025-03-02T22:15:31.916Z] Test 'createSavingsGroup' completed successfully in 4902ms
-[2025-03-02T22:15:31.916Z] Waiting 1000ms before next test...
+[2025-03-02T22:29:22.046Z] Sending POST request to /savings/groups with data: {"name":"Test Savings Group","description":"This is a test savings group created by automated testing","targetAmount":10000,"contributionAmount":500,"frequency":"weekly","startDate":"2025-03-03T22:29:22.046Z","endDate":"2025-06-02T22:29:22.046Z"}
+[2025-03-02T22:29:22.761Z] Response status: 201
+[2025-03-02T22:29:22.762Z] Response data: {"success":true,"message":"Savings group created successfully","data":{"name":"Test Savings Group","description":"This is a test savings group created by automated testing","creator":"67c4db9b54dd36a92b16d059","members":["67c4db9b54dd36a92b16d059"],"targetAmount":10000,"contributionAmount":500,"frequency":"weekly","currentTotal":0,"startDate":"2025-03-03T22:29:22.046Z","endDate":"2025-06-02T22:29:22.046Z","isActive":true,"_id":"67c4dbc254dd36a92b16d099","createdAt":"2025-03-02T22:29:22.425Z","up... (truncated)
+[2025-03-02T22:29:22.763Z] Savings group created with ID: 67c4dbc254dd36a92b16d099
+[2025-03-02T22:29:22.764Z] Sending GET request to /savings/groups
+[2025-03-02T22:29:23.457Z] Response status: 200
+[2025-03-02T22:29:23.457Z] Response data: {"success":true,"data":{"groups":[{"_id":"67c4dbc254dd36a92b16d099","name":"Test Savings Group","description":"This is a test savings group created by automated testing","creator":"67c4db9b54dd36a92b16d059","members":["67c4db9b54dd36a92b16d059"],"targetAmount":10000,"contributionAmount":500,"frequency":"weekly","currentTotal":0,"startDate":"2025-03-03T22:29:22.046Z","endDate":"2025-06-02T22:29:22.046Z","isActive":true,"createdAt":"2025-03-02T22:29:22.425Z","updatedAt":"2025-03-02T22:29:22.425Z",... (truncated)
+[2025-03-02T22:29:23.458Z] Retrieved 6 savings groups
+[2025-03-02T22:29:23.459Z] Sending GET request to /savings/my-groups
+[2025-03-02T22:29:24.307Z] Response status: 200
+[2025-03-02T22:29:24.308Z] Response data: {"success":true,"data":{"ownedGroups":[{"_id":"67c4dbc254dd36a92b16d099","name":"Test Savings Group","description":"This is a test savings group created by automated testing","creator":"67c4db9b54dd36a92b16d059","members":["67c4db9b54dd36a92b16d059"],"targetAmount":10000,"contributionAmount":500,"frequency":"weekly","currentTotal":0,"startDate":"2025-03-03T22:29:22.046Z","endDate":"2025-06-02T22:29:22.046Z","isActive":true,"createdAt":"2025-03-02T22:29:22.425Z","updatedAt":"2025-03-02T22:29:22.4... (truncated)
+[2025-03-02T22:29:24.309Z] Retrieved user's savings groups
+[2025-03-02T22:29:24.309Z] Sending GET request to /savings/groups/67c4dbc254dd36a92b16d099
+[2025-03-02T22:29:25.359Z] Response status: 200
+[2025-03-02T22:29:25.360Z] Response data: {"success":true,"data":{"group":{"_id":"67c4dbc254dd36a92b16d099","name":"Test Savings Group","description":"This is a test savings group created by automated testing","creator":"67c4db9b54dd36a92b16d059","members":["67c4db9b54dd36a92b16d059"],"targetAmount":10000,"contributionAmount":500,"frequency":"weekly","currentTotal":0,"startDate":"2025-03-03T22:29:22.046Z","endDate":"2025-06-02T22:29:22.046Z","isActive":true,"createdAt":"2025-03-02T22:29:22.425Z","updatedAt":"2025-03-02T22:29:22.425Z","_... (truncated)
+[2025-03-02T22:29:25.361Z] Retrieved group details successfully
+[2025-03-02T22:29:25.362Z] Test 'createSavingsGroup' completed successfully in 3316ms
+[2025-03-02T22:29:25.363Z] Waiting 1000ms before next test...
 
 ================================================================================
-[2025-03-02T22:15:32.924Z] Running test: contributeSavings
+[2025-03-02T22:29:26.375Z] Running test: contributeSavings
 ================================================================================
 
-[2025-03-02T22:15:32.926Z] Sending POST request to /savings/groups/67c4d87fceaf1bf4dc3e1fa7/contribute with data: {"amount":100}
-[2025-03-02T22:15:36.013Z] Response status: 200
-[2025-03-02T22:15:36.015Z] Response data: {"success":true,"message":"Contribution made successfully","data":{"success":true,"transaction":{"userId":"67c4d846ceaf1bf4dc3e1f5f","type":"group_contribution","amount":100,"fee":0,"status":"completed","reference":"MF-CONTRIB-1740953734168-67c4d","description":"Contribution to Test Savings Group","metadata":{"groupId":"67c4d87fceaf1bf4dc3e1fa7","contributionAmount":100},"_id":"67c4d886ceaf1bf4dc3e1fbb","createdAt":"2025-03-02T22:15:34.169Z","updatedAt":"2025-03-02T22:15:34.169Z","__v":0},"newBa... (truncated)
-[2025-03-02T22:15:36.017Z] Contribution successful
-[2025-03-02T22:15:36.018Z] Sending GET request to /savings/groups/67c4d87fceaf1bf4dc3e1fa7/contributions
-[2025-03-02T22:15:37.022Z] Response status: 200
-[2025-03-02T22:15:37.023Z] Response data: {"success":true,"data":{"member":{"_id":"67c4d87fceaf1bf4dc3e1fa9","groupId":"67c4d87fceaf1bf4dc3e1fa7","userId":"67c4d846ceaf1bf4dc3e1f5f","joinDate":"2025-03-02T22:15:27.741Z","contributionsMade":1,"totalContributed":100,"isActive":true,"createdAt":"2025-03-02T22:15:27.741Z","updatedAt":"2025-03-02T22:15:35.499Z","__v":0,"lastContributionDate":"2025-03-02T22:15:35.499Z"},"contributions":[{"_id":"67c4d886ceaf1bf4dc3e1fbb","userId":"67c4d846ceaf1bf4dc3e1f5f","type":"group_contribution","amount":... (truncated)
-[2025-03-02T22:15:37.024Z] Retrieved user contributions successfully
-[2025-03-02T22:15:37.025Z] Sending GET request to /wallet
-[2025-03-02T22:15:38.053Z] Response status: 200
-[2025-03-02T22:15:38.054Z] Response data: {"success":true,"data":{"wallet":{"_id":"67c4d849ceaf1bf4dc3e1f64","userId":"67c4d846ceaf1bf4dc3e1f5f","bankName":"Squad Microfinance Bank","balance":900,"isActive":true,"createdAt":"2025-03-02T22:14:33.195Z","updatedAt":"2025-03-02T22:15:34.422Z","__v":0,"accountName":"Test User","accountNumber":"3857834185","squadVirtualAccountId":"MF-67c4d8"},"recentTransactions":[{"_id":"67c4d886ceaf1bf4dc3e1fbb","userId":"67c4d846ceaf1bf4dc3e1f5f","type":"group_contribution","amount":100,"fee":0,"status":"c... (truncated)
-[2025-03-02T22:15:38.055Z] Updated wallet balance: 900
-[2025-03-02T22:15:38.055Z] Test 'contributeSavings' completed successfully in 5129ms
-[2025-03-02T22:15:38.056Z] Waiting 1000ms before next test...
+[2025-03-02T22:29:26.378Z] ERROR: No group ID or insufficient balance, skipping contribution
+[2025-03-02T22:29:26.380Z] Test 'contributeSavings' skipped
+[2025-03-02T22:29:26.381Z] Waiting 1000ms before next test...
 
 ================================================================================
-[2025-03-02T22:15:39.070Z] Running test: educationModules
+[2025-03-02T22:29:27.385Z] Running test: educationModules
 ================================================================================
 
-[2025-03-02T22:15:39.072Z] Sending GET request to /education/modules
-[2025-03-02T22:15:39.844Z] Response status: 200
-[2025-03-02T22:15:39.844Z] Response data: {"success":true,"data":{"modules":[{"_id":"67c19cac60eaa72970b9f6a5","title":"Budgeting Basics","description":"Learn the fundamentals of creating and maintaining a personal budget","content":"\n# Budgeting Basics\n\nBudgeting is the process of creating a plan for how to spend your money. It helps you make sure you have enough money for the things you need and the things that are important to you.\n\n## Why Budget?\n\n- Track your spending\n- Reduce unnecessary expenses\n- Save for future goals\n... (truncated)
-[2025-03-02T22:15:39.846Z] Retrieved 3 education modules
-[2025-03-02T22:15:39.847Z] Selected module ID: 67c19cac60eaa72970b9f6a5
-[2025-03-02T22:15:39.848Z] Sending GET request to /education/modules/67c19cac60eaa72970b9f6a5
-[2025-03-02T22:15:40.110Z] Response status: 200
-[2025-03-02T22:15:40.110Z] Response data: {"success":true,"data":{"module":{"_id":"67c19cac60eaa72970b9f6a5","title":"Budgeting Basics","description":"Learn the fundamentals of creating and maintaining a personal budget","content":"\n# Budgeting Basics\n\nBudgeting is the process of creating a plan for how to spend your money. It helps you make sure you have enough money for the things you need and the things that are important to you.\n\n## Why Budget?\n\n- Track your spending\n- Reduce unnecessary expenses\n- Save for future goals\n- ... (truncated)
-[2025-03-02T22:15:40.112Z] Retrieved module details successfully
-[2025-03-02T22:15:40.112Z] Sending POST request to /education/modules/67c19cac60eaa72970b9f6a5/submit with data: {"answers":[0,0,0]}
-[2025-03-02T22:15:41.383Z] Response status: 200
-[2025-03-02T22:15:41.384Z] Response data: {"success":true,"message":"You did not pass the quiz. Try again!","data":{"score":33,"passed":false,"results":[{"question":"What is the purpose of a budget?","userAnswer":0,"correctAnswer":0,"isCorrect":true,"explanation":"A budget helps you track your spending and make informed financial decisions."},{"question":"What percentage of your income should go to needs according to the 50/30/20 rule?","userAnswer":0,"correctAnswer":2,"isCorrect":false,"explanation":"The 50/30/20 rule suggests allocati... (truncated)
-[2025-03-02T22:15:41.386Z] Quiz submitted with score: 33%
-[2025-03-02T22:15:41.387Z] Sending GET request to /education/leaderboard
-[2025-03-02T22:15:41.639Z] Response status: 200
-[2025-03-02T22:15:41.641Z] Response data: {"success":true,"data":[]}
-[2025-03-02T22:15:41.642Z] Retrieved leaderboard with 0 entries
-[2025-03-02T22:15:41.643Z] Sending GET request to /education/progress
-[2025-03-02T22:15:43.103Z] Response status: 200
-[2025-03-02T22:15:43.104Z] Response data: {"success":true,"data":{"modules":[{"module":{"_id":"67c19cac60eaa72970b9f6a5","title":"Budgeting Basics","description":"Learn the fundamentals of creating and maintaining a personal budget","level":"beginner","category":"budgeting","duration":15,"points":10},"progress":{"_id":"67c4d88dceaf1bf4dc3e1fde","userId":"67c4d846ceaf1bf4dc3e1f5f","moduleId":"67c19cac60eaa72970b9f6a5","isCompleted":false,"quizScore":33,"lastAttemptDate":"2025-03-02T22:15:41.104Z","createdAt":"2025-03-02T22:15:41.104Z","u... (truncated)
-[2025-03-02T22:15:43.105Z] Retrieved user progress successfully
-[2025-03-02T22:15:43.106Z] Test 'educationModules' completed successfully in 4034ms
-[2025-03-02T22:15:43.107Z] Waiting 1000ms before next test...
+[2025-03-02T22:29:27.387Z] Sending GET request to /education/modules
+[2025-03-02T22:29:27.728Z] Response status: 200
+[2025-03-02T22:29:27.729Z] Response data: {"success":true,"data":{"modules":[{"_id":"67c19cac60eaa72970b9f6a5","title":"Budgeting Basics","description":"Learn the fundamentals of creating and maintaining a personal budget","content":"\n# Budgeting Basics\n\nBudgeting is the process of creating a plan for how to spend your money. It helps you make sure you have enough money for the things you need and the things that are important to you.\n\n## Why Budget?\n\n- Track your spending\n- Reduce unnecessary expenses\n- Save for future goals\n... (truncated)
+[2025-03-02T22:29:27.730Z] Retrieved 3 education modules
+[2025-03-02T22:29:27.730Z] Selected module ID: 67c19cac60eaa72970b9f6a5
+[2025-03-02T22:29:27.731Z] Sending GET request to /education/modules/67c19cac60eaa72970b9f6a5
+[2025-03-02T22:29:27.903Z] Response status: 200
+[2025-03-02T22:29:27.905Z] Response data: {"success":true,"data":{"module":{"_id":"67c19cac60eaa72970b9f6a5","title":"Budgeting Basics","description":"Learn the fundamentals of creating and maintaining a personal budget","content":"\n# Budgeting Basics\n\nBudgeting is the process of creating a plan for how to spend your money. It helps you make sure you have enough money for the things you need and the things that are important to you.\n\n## Why Budget?\n\n- Track your spending\n- Reduce unnecessary expenses\n- Save for future goals\n- ... (truncated)
+[2025-03-02T22:29:27.906Z] Retrieved module details successfully
+[2025-03-02T22:29:27.907Z] Sending POST request to /education/modules/67c19cac60eaa72970b9f6a5/submit with data: {"answers":[0,0,0]}
+[2025-03-02T22:29:28.745Z] Response status: 200
+[2025-03-02T22:29:28.746Z] Response data: {"success":true,"message":"You did not pass the quiz. Try again!","data":{"score":33,"passed":false,"results":[{"question":"What is the purpose of a budget?","userAnswer":0,"correctAnswer":0,"isCorrect":true,"explanation":"A budget helps you track your spending and make informed financial decisions."},{"question":"What percentage of your income should go to needs according to the 50/30/20 rule?","userAnswer":0,"correctAnswer":2,"isCorrect":false,"explanation":"The 50/30/20 rule suggests allocati... (truncated)
+[2025-03-02T22:29:28.747Z] Quiz submitted with score: 33%
+[2025-03-02T22:29:28.748Z] Sending GET request to /education/leaderboard
+[2025-03-02T22:29:28.910Z] Response status: 200
+[2025-03-02T22:29:28.911Z] Response data: {"success":true,"data":[]}
+[2025-03-02T22:29:28.912Z] Retrieved leaderboard with 0 entries
+[2025-03-02T22:29:28.913Z] Sending GET request to /education/progress
+[2025-03-02T22:29:29.969Z] Response status: 200
+[2025-03-02T22:29:29.969Z] Response data: {"success":true,"data":{"modules":[{"module":{"_id":"67c19cac60eaa72970b9f6a5","title":"Budgeting Basics","description":"Learn the fundamentals of creating and maintaining a personal budget","level":"beginner","category":"budgeting","duration":15,"points":10},"progress":{"_id":"67c4dbc854dd36a92b16d0bf","userId":"67c4db9b54dd36a92b16d059","moduleId":"67c19cac60eaa72970b9f6a5","isCompleted":false,"quizScore":33,"lastAttemptDate":"2025-03-02T22:29:28.579Z","createdAt":"2025-03-02T22:29:28.580Z","u... (truncated)
+[2025-03-02T22:29:29.970Z] Retrieved user progress successfully
+[2025-03-02T22:29:29.971Z] Test 'educationModules' completed successfully in 2584ms
+[2025-03-02T22:29:29.972Z] Waiting 1000ms before next test...
 
 ================================================================================
-[2025-03-02T22:15:44.108Z] Running test: notifications
+[2025-03-02T22:29:30.986Z] Running test: notifications
 ================================================================================
 
-[2025-03-02T22:15:44.110Z] Sending GET request to /notifications
-[2025-03-02T22:15:44.842Z] Response status: 200
-[2025-03-02T22:15:44.844Z] Response data: {"success":true,"data":[]}
-[2025-03-02T22:15:44.845Z] Retrieved 0 notifications
-[2025-03-02T22:15:44.846Z] Sending GET request to /notifications/unread
-[2025-03-02T22:15:45.601Z] Response status: 200
-[2025-03-02T22:15:45.602Z] Response data: {"success":true,"data":[]}
-[2025-03-02T22:15:45.603Z] Retrieved 0 unread notifications
-[2025-03-02T22:15:45.604Z] Test 'notifications' completed successfully in 1494ms
-[2025-03-02T22:15:45.606Z] Waiting 1000ms before next test...
+[2025-03-02T22:29:30.989Z] Sending GET request to /notifications
+[2025-03-02T22:29:31.509Z] Response status: 200
+[2025-03-02T22:29:31.510Z] Response data: {"success":true,"data":[]}
+[2025-03-02T22:29:31.511Z] Retrieved 0 notifications
+[2025-03-02T22:29:31.512Z] Sending GET request to /notifications/unread
+[2025-03-02T22:29:32.069Z] Response status: 200
+[2025-03-02T22:29:32.070Z] Response data: {"success":true,"data":[]}
+[2025-03-02T22:29:32.071Z] Retrieved 0 unread notifications
+[2025-03-02T22:29:32.072Z] Test 'notifications' completed successfully in 1083ms
+[2025-03-02T22:29:32.073Z] Waiting 1000ms before next test...
 
 ================================================================================
-[2025-03-02T22:15:46.617Z] Running test: emailTest
+[2025-03-02T22:29:33.088Z] Running test: emailTest
 ================================================================================
 
-[2025-03-02T22:15:46.620Z] Sending POST request to /email/test with data: {"type":"welcome"}
-[2025-03-02T22:15:52.130Z] Response status: 500
-[2025-03-02T22:15:52.131Z] Response data: {"success":false,"error":"Failed to send welcome email: Email sending timed out","stack":"Error: Failed to send welcome email: Email sending timed out\n    at C:\\Users\\USER\\Desktop\\microfund-backend\\src\\controllers\\email.controller.ts:59:17\n    at Generator.throw (<anonymous>)\n    at rejected (C:\\Users\\USER\\Desktop\\microfund-backend\\src\\controllers\\email.controller.ts:6:65)"}
-[2025-03-02T22:15:52.132Z] ERROR: Email test failed, this feature might not be enabled
-[2025-03-02T22:15:52.133Z] Test 'emailTest' skipped
-[2025-03-02T22:15:52.134Z] Running cleanup tasks...
+[2025-03-02T22:29:33.090Z] Sending POST request to /email/test with data: {"type":"welcome"}
+[2025-03-02T22:29:38.518Z] Response status: 500
+[2025-03-02T22:29:38.519Z] Response data: {"success":false,"error":"Failed to send welcome email: Email sending timed out","stack":"Error: Failed to send welcome email: Email sending timed out\n    at C:\\Users\\USER\\Desktop\\microfund-backend\\src\\controllers\\email.controller.ts:59:17\n    at Generator.throw (<anonymous>)\n    at rejected (C:\\Users\\USER\\Desktop\\microfund-backend\\src\\controllers\\email.controller.ts:6:65)"}
+[2025-03-02T22:29:38.520Z] ERROR: Email test failed, this feature might not be enabled
+[2025-03-02T22:29:38.520Z] Test 'emailTest' skipped
+[2025-03-02T22:29:38.521Z] Running cleanup tasks...
 
 ================================================================================
-[2025-03-02T22:15:52.135Z] Running test: cleanup
+[2025-03-02T22:29:38.521Z] Running test: cleanup
 ================================================================================
 
 
 ================================================================================
-[2025-03-02T22:15:52.136Z] Starting cleanup tasks
+[2025-03-02T22:29:38.522Z] Starting cleanup tasks
 ================================================================================
 
-[2025-03-02T22:15:52.137Z] Sending DELETE request to /business/products/67c4d86fceaf1bf4dc3e1f91
-[2025-03-02T22:15:54.393Z] Response status: 200
-[2025-03-02T22:15:54.394Z] Response data: {"success":true,"message":"Product deleted successfully"}
-[2025-03-02T22:15:54.395Z] Product deleted successfully
-[2025-03-02T22:15:54.397Z] Note: Not leaving savings group as creator cannot leave
-[2025-03-02T22:15:54.398Z] Test 'cleanup' completed successfully in 2262ms
+[2025-03-02T22:29:38.523Z] Sending DELETE request to /business/products/67c4dbba54dd36a92b16d085
+[2025-03-02T22:29:40.225Z] Response status: 200
+[2025-03-02T22:29:40.227Z] Response data: {"success":true,"message":"Product deleted successfully"}
+[2025-03-02T22:29:40.229Z] Product deleted successfully
+[2025-03-02T22:29:40.229Z] Note: Not leaving savings group as creator cannot leave
+[2025-03-02T22:29:40.231Z] Test 'cleanup' completed successfully in 1709ms
 
 ================================================================================
-[2025-03-02T22:15:57.408Z] 
+[2025-03-02T22:29:43.239Z] 
 ================================================================================
 TESTS SUMMARY
 ================================================================================
 Total Tests: 22
-Passed: 17
+Passed: 14
 Failed: 0
-Skipped: 5
+Skipped: 8
 Pass Rate: 100.00%
 ================================================================================
     
@@ -353,7 +340,7 @@ Pass Rate: 100.00%
 
 
 ================================================================================
-[2025-03-02T22:15:57.412Z] 
+[2025-03-02T22:29:43.241Z] 
 ✅ ALL EXECUTED TESTS COMPLETED SUCCESSFULLY!
 ================================================================================
 

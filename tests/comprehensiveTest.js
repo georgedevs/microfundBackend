@@ -416,8 +416,15 @@ const tests = {
     const bankCode = '000013'; // GTBank
     const accountNumber = '0123456789';
     const accountName = 'TEST ACCOUNT';
+
     
-    let withdrawResponse;
+    
+    const withdrawResponse = await client.post('/wallet/withdraw', {
+      amount: withdrawalAmount,
+      bankCode: bankCode,
+      accountNumber: accountNumber,
+      accountName: accountName
+    }, true);
     
 
     

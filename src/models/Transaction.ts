@@ -6,7 +6,8 @@ export type TransactionType =
   | 'investment' 
   | 'return' 
   | 'group_contribution' 
-  | 'group_distribution';
+  | 'group_distribution'
+  | 'payment_link';
 
 export type TransactionStatus = 'pending' | 'completed' | 'failed' | 'refunded';
 

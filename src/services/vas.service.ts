@@ -146,26 +146,46 @@ async getDataBundles(network) {
   }
 
   try {
-    const url = `${this.apiUrl}/data-bundles?network=${network}`;
+    // Set a default base URL for testing when SQUAD_API_URL is not set
+    const baseUrl = process.env.SQUAD_API_URL || 
+      (process.env.NODE_ENV === 'production' 
+        ? 'https://api-d.squadco.com' 
+        : 'https://sandbox-api-d.squadco.com');
+    
+    const url = `${baseUrl}/vending/data-bundles?network=${network}`;
     console.log(`Fetching data bundles from: ${url}`);
     
     const response = await axios.get(url, {
       headers: {
         Authorization: `Bearer ${this.secretKey}`,
       },
-      timeout: 15000, // Add timeout
+      timeout: 15000,
     });
 
     if (response.data && response.data.status === 200) {
       return response.data.data;
     } else {
-      console.error('Error response from data bundles API:', response.data);
       throw new AppError(response.data?.message || 'Failed to fetch data bundles', 
-                          response.data?.status || 500);
+                          response.data?.status || 400);
     }
   } catch (error) {
-    console.error('Error fetching data bundles:', error.response?.data || error.message);
-    throw new AppError(`Error fetching data bundles: ${error.response?.data?.message || error.message}`, 500);
+    // In mock mode, return sample data for testing
+    if (process.env.USE_MOCK_PAYMENT === 'true') {
+      return [
+        { 
+          plan_name: "MTN data_plan", 
+          bundle_value: "100MB", 
+          bundle_validity: "Daily", 
+          bundle_description: "Daily Plan", 
+          bundle_price: "100", 
+          plan_code: "1001", 
+          network: "MTN" 
+        },
+        // Add more mock data plans
+      ];
+    }
+    
+    throw new AppError(`Error fetching data bundles: ${error.message}`, 500);
   }
 }
 
