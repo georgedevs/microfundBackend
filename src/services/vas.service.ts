@@ -136,71 +136,9 @@ export class VASService {
 /**
  * Get data bundles
  */
-async getDataBundles(network: string) {
+async getDataBundles(network) {
   if (!network) {
     throw new AppError('Network is required', 400);
-  }
-
-  // For mock environment, return mock data bundles
-  if (process.env.USE_MOCK_PAYMENT === 'true') {
-    // Return mock data bundles based on network
-    const mockBundles = {
-      'MTN': [
-        {
-          plan_name: "MTN data_plan",
-          bundle_value: "100MB",
-          bundle_validity: "Daily Plan",
-          bundle_description: "Daily Plan",
-          bundle_price: "100",
-          plan_code: "1001",
-          network: "MTN"
-        },
-        {
-          plan_name: "MTN data_plan",
-          bundle_value: "1GB",
-          bundle_validity: "30 days",
-          bundle_description: "Monthly Plan",
-          bundle_price: "1000",
-          plan_code: "1005",
-          network: "MTN"
-        }
-      ],
-      'GLO': [
-        {
-          plan_name: "GLO data_plan",
-          bundle_value: "200MB",
-          bundle_validity: "Daily Plan",
-          bundle_description: "Daily Plan",
-          bundle_price: "100",
-          plan_code: "2001",
-          network: "GLO"
-        }
-      ],
-      'AIRTEL': [
-        {
-          plan_name: "AIRTEL data_plan",
-          bundle_value: "300MB",
-          bundle_validity: "Daily Plan",
-          bundle_description: "Daily Plan",
-          bundle_price: "100",
-          plan_code: "3001",
-          network: "AIRTEL"
-        }
-      ],
-      '9MOBILE': [
-        {
-          plan_name: "9MOBILE data_plan",
-          bundle_value: "150MB",
-          bundle_validity: "Daily Plan",
-          bundle_description: "Daily Plan",
-          bundle_price: "100",
-          plan_code: "4001",
-          network: "9MOBILE"
-        }
-      ]
-    };
-    
-    return mockBundles[network] || [];
   }
 
   try {
@@ -220,12 +158,7 @@ async getDataBundles(network: string) {
       throw new AppError('Failed to fetch data bundles', 500);
     }
   } catch (error) {
-    // If mock payment is enabled and there's a connection error, return mock data
-    if (process.env.USE_MOCK_PAYMENT === 'true' && 
-        (error.code === 'ECONNREFUSED' || error.code === 'ENOTFOUND')) {
-      return [];
-    }
-    
+    console.error('Error fetching data bundles:', error);
     throw new AppError('Error fetching data bundles: ' + (error.response?.data?.message || error.message), 500);
   }
 }

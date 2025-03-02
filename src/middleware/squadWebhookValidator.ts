@@ -11,11 +11,13 @@ export const squadWebhookValidator = (
   next: NextFunction
 ) => {
   try {
-const signature = req.headers['x-squad-encrypted-body'] as string;
+    // Check for both signature headers since Squad documentation mentions both formats
+    const signature = req.headers['x-squad-signature'] || 
+                     req.headers['x-squad-encrypted-body'] as string;
     
     // Check if signature is present
     if (!signature) {
-      console.warn('Missing x-squad-encrypted-body in webhook request');
+      console.warn('Missing signature header in webhook request');
       return res.status(400).json({ 
         success: false, 
         message: 'Missing signature' 
@@ -23,7 +25,9 @@ const signature = req.headers['x-squad-encrypted-body'] as string;
     }
 
     // Get secret key from environment
-    const secretKey = process.env.SQUAD_SECRET_KEY;
+    const secretKey = process.env.NODE_ENV === 'production'
+      ? process.env.SQUAD_SECRET_KEY
+      : process.env.SQUAD_SANDBOX_SECRET_KEY || process.env.SQUAD_SECRET_KEY;
  
     if (!secretKey) {
       console.error('Squad secret key not configured');

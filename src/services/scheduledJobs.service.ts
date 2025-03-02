@@ -17,7 +17,17 @@ export class ScheduledJobsService {
         console.error('Error in missed webhooks job:', error);
       }
     });
-
+  
+    // Add a job to run immediately at startup to process any pending webhook logs
+    setTimeout(async () => {
+      try {
+        console.log('Running initial check for missed webhooks');
+        await this.checkMissedWebhooks();
+      } catch (error) {
+        console.error('Error in initial missed webhooks check:', error);
+      }
+    }, 5000); // Run 5 seconds after server start
+  
     console.log('Scheduled jobs started');
   }
 

@@ -9,12 +9,7 @@ export class PaymentLinkService {
 /**
  * Create a shareable payment link
  */
-async createPaymentLink(
-  userId: string,
-  amount: number,
-  description: string,
-  redirectLink?: string
-) {
+async createPaymentLink(userId, amount, description, redirectLink) {
   // Validate amount
   if (amount < 100) {
     throw new AppError('Minimum amount is ₦100', 400);
@@ -28,38 +23,8 @@ async createPaymentLink(
   // Generate a unique hash for the payment link
   const hash = `mf-${userId.substring(0, 5)}-${Date.now().toString(36)}`;
   
-  // For mock environment, create mock payment link
-  if (process.env.USE_MOCK_PAYMENT === 'true') {
-    // Create transaction record
-    const reference = `MF-LINK-${Date.now()}-${userId.substring(0, 5)}`;
-    const mockPaymentUrl = `http://localhost:3000/mock-payment/${reference}?amount=${amount}`;
-    
-    await Transaction.create({
-      userId,
-      type: 'payment_link',
-      amount,
-      status: 'pending',
-      reference,
-      description: description || 'Payment link created',
-      metadata: {
-        paymentLinkHash: hash,
-        paymentLinkUrl: mockPaymentUrl
-      }
-    });
-
-    return {
-      success: true,
-      reference,
-      paymentLink: mockPaymentUrl,
-      hash,
-      amount,
-      description
-    };
-  }
-  
-  // Real implementation for live environment
+  // Create payment link using Squad API
   try {
-    // Create payment link using Squad API
     const result = await paymentService.createPaymentLink(
       `MicroFund - ${user.fullName}`,
       hash,

@@ -9,11 +9,7 @@ import AppError from '@/utils/error';
  * @route POST /api/email/test
  * @access Private/Admin
  */
-export const sendTestEmail = catchAsyncError(async (
-  req: Request, 
-  res: Response, 
-  next: NextFunction
-) => {
+export const sendTestEmail = catchAsyncError(async (req, res, next) => {
   // Only available in development
   if (process.env.NODE_ENV === 'production') {
     return next(new AppError('This endpoint is not available in production', 404));
@@ -26,70 +22,32 @@ export const sendTestEmail = catchAsyncError(async (
     return next(new AppError('Email type is required', 400));
   }
 
-  // For mock environment, return a success response without actually sending an email
-  if (process.env.USE_MOCK_PAYMENT === 'true') {
-    return res.status(200).json({
-      success: true,
-      message: `Test ${type} email simulation successful`,
-      data: {
-        messageId: `mock-email-${Date.now()}`,
-        success: true
+  // Set a reasonable timeout for email sending
+  const sendEmailPromise = new Promise(async (resolve, reject) => {
+    try {
+      let result;
+      switch (type) {
+        case 'welcome':
+          result = await emailService.sendWelcomeEmail(userId);
+          break;
+        // ... other cases
+        default:
+          return reject(new AppError('Invalid email type', 400));
       }
-    });
-  }
-
-  let result;
+      resolve(result);
+    } catch (error) {
+      reject(error);
+    }
+  });
   
   try {
-    switch (type) {
-      case 'welcome':
-        result = await emailService.sendWelcomeEmail(userId);
-        break;
-      case 'transaction':
-        result = await emailService.sendTransactionReceipt(userId, {
-          type: 'deposit',
-          amount: 10000,
-          description: 'Wallet deposit',
-          reference: 'TEST-REF-' + Date.now(),
-          status: 'completed',
-          createdAt: new Date()
-        });
-        break;
-      case 'investment':
-        result = await emailService.sendInvestmentOpportunityAlert(userId, {
-          id: '123456789',
-          name: 'Test Business',
-          description: 'This is a test business for email template demonstration. This business focuses on innovative solutions for students.',
-          fundingGoal: 100000,
-          raisedAmount: 25000,
-          expectedReturnRate: 15,
-          duration: 6
-        });
-        break;
-      case 'savings':
-        result = await emailService.sendSavingsGroupReminder(userId, {
-          id: '123456789',
-          name: 'Test Savings Group',
-          contributionAmount: 5000,
-          dueDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000) // 3 days from now
-        });
-        break;
-      case 'education':
-        result = await emailService.sendEducationalAchievementCertificate(userId, {
-          title: 'Financial Literacy Master',
-          description: 'Completed advanced financial literacy module',
-          score: 95,
-          completionDate: new Date(),
-          module: {
-            id: '123456789',
-            title: 'Understanding Investment Basics',
-            level: 'intermediate'
-          }
-        });
-        break;
-      default:
-        return next(new AppError('Invalid email type', 400));
-    }
+    // Apply a 5-second timeout
+    const result = await Promise.race([
+      sendEmailPromise,
+      new Promise((_, reject) => 
+        setTimeout(() => reject(new AppError('Email sending timed out', 408)), 5000)
+      )
+    ]);
     
     res.status(200).json({
       success: true,

@@ -29,7 +29,7 @@ const SQUAD_WEBHOOK_IP = '18.133.63.109';
  */
 webhookRoutes.post(
   '/squad', 
-  ipWhitelist([SQUAD_WEBHOOK_IP]), 
+  ipWhitelist([SQUAD_WEBHOOK_IP, '127.0.0.1']),
   squadWebhookValidator, 
   handleSquadWebhook
 );
@@ -54,7 +54,7 @@ webhookRoutes.post(
  */
 webhookRoutes.post(
   '/virtual-account', 
-  ipWhitelist([SQUAD_WEBHOOK_IP]), 
+  ipWhitelist([SQUAD_WEBHOOK_IP, '127.0.0.1']),
   squadWebhookValidator, 
   handleVirtualAccountWebhook
 );

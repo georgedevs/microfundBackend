@@ -11,13 +11,19 @@ export class VirtualAccountService {
   private secretKey: string;
   private merchantId: string;
 
-  constructor() {
+// Update constructor to properly set API URL and credentials
+constructor() {
     this.apiUrl = process.env.NODE_ENV === 'production' 
-      ? `${process.env.SQUAD_API_URL}/virtual-account` 
-      : `${process.env.SQUAD_API_URL}/virtual-account`;
+      ? 'https://api-d.squadco.com/virtual-account' 
+      : 'https://sandbox-api-d.squadco.com/virtual-account';
       
-    this.secretKey = process.env.SQUAD_SECRET_KEY || '';
-    this.merchantId = process.env.SQUAD_MERCHANT_ID || 'SBN1EBZEQ8';
+    this.secretKey = process.env.NODE_ENV === 'production'
+      ? process.env.SQUAD_SECRET_KEY
+      : process.env.SQUAD_SANDBOX_SECRET_KEY || process.env.SQUAD_SECRET_KEY;
+      
+    this.merchantId = process.env.NODE_ENV === 'production'
+      ? process.env.SQUAD_MERCHANT_ID
+      : process.env.SQUAD_SANDBOX_MERCHANT_ID || process.env.SQUAD_MERCHANT_ID;
   }
 
 /**

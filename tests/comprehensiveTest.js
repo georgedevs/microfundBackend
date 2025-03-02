@@ -321,20 +321,6 @@ const tests = {
     await log(`Deposit initiated with reference: ${depositReference}`);
     await log(`Checkout URL: ${checkoutUrl}`);
 
-    // If using mock, complete the payment
-    if (config.useMockPayment) {
-      await log('Using mock payment - completing payment automatically');
-      const mockCompleteResponse = await client.post(`/wallet/mock-payment/${depositReference}`, {}, true);
-      
-      if (!mockCompleteResponse.success) {
-        throw new Error('Failed to complete mock payment');
-      }
-      
-      await log('Mock payment completed successfully');
-    } else {
-      await log('IMPORTANT: In live mode, you need to manually complete the payment by visiting the checkout URL');
-      await log('After completing payment, continue the test script to verify the deposit');
-    }
 
     // Verify deposit
     const verifyResponse = await client.get(`/wallet/deposit/${depositReference}`, true);
@@ -414,24 +400,6 @@ const tests = {
     const banks = banksResponse.data.data;
     await log(`Retrieved ${banks.length} banks`);
 
-    // Test bank account verification (use with caution in live environment)
-    if (config.useMockPayment) {
-      const testBankCode = banks[0]?.code || '000013'; // GTBank code
-      const testAccountNumber = '0123456789';
-      
-      await log('Testing mock account verification');
-      const verifyAccountResponse = await client.post('/banks/verify-account', {
-        bankCode: testBankCode,
-        accountNumber: testAccountNumber
-      }, true);
-      
-      if (!verifyAccountResponse.success) {
-        await log('Bank account verification failed - this may affect withdrawal tests', true);
-      } else {
-        const accountName = verifyAccountResponse.data.data.account_name;
-        await log(`Account verified successfully: ${accountName}`);
-      }
-    }
     
     return true;
   },
@@ -451,23 +419,7 @@ const tests = {
     
     let withdrawResponse;
     
-    if (config.useMockPayment) {
-      await log('Testing mock withdrawal');
-      withdrawResponse = await client.post('/wallet/mock-withdraw', {
-        amount: withdrawalAmount,
-        bankCode,
-        accountNumber,
-        accountName
-      }, true);
-    } else {
-      await log('Testing live withdrawal');
-      withdrawResponse = await client.post('/wallet/withdraw', {
-        amount: withdrawalAmount,
-        bankCode,
-        accountNumber,
-        accountName
-      }, true);
-    }
+
     
     if (!withdrawResponse.success) {
       if (withdrawResponse.data.error?.includes('bank code')) {
