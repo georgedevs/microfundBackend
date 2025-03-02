@@ -21,6 +21,9 @@ SQUAD_MERCHANT_ID=MOCK_MERCHANT_ID
 SQUAD_CALLBACK_URL=http://localhost:5000/api/webhooks/squad
 SQUAD_REDIRECT_URL=http://localhost:3000/payment/success
 
+SQUAD_SANDBOX_SECRET_KEY=sandbox_sk_7cd69f28c6280d33f7cb8c0c9a691ba7ccb306e52f44
+SQUAD_SANDBOX_PUBLIC_KEY=sandbox_pk_7cd69f28c6280d33f7cb99688e7c7bafbfb012ea3958
+
 # Frontend
 FRONTEND_URL=https://your-production-frontend-url.com
 
