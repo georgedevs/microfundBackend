@@ -111,3 +111,5 @@ router.patch('/read-all', markAllAsRead);
  *         description: Notification not found
  */
 router.delete('/:id', deleteNotification);
+
+export default router;

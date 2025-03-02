@@ -11,6 +11,11 @@ import bankRoutes from './routes/bank.routes';
 import savingsRoutes from './routes/savings.routes';
 import businessRoutes from './routes/business.routes';
 import educationRoutes from './routes/education.routes';
+import paymentLinkRoutes from './routes/payment-link.routes';
+import vasRoutes from './routes/vas.routes';
+import ussdRoutes from './routes/ussd.routes';
+import notificationRoutes from './routes/notification.routes';
+import emailRoutes from './routes/email.routes';
 
 const app: Application = express();
 
@@ -31,7 +36,6 @@ if (process.env.NODE_ENV === 'development') {
   app.use(requestLogger);
 }
 
-
 // Set up Swagger UI
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
@@ -43,6 +47,11 @@ app.use('/api/webhooks', webhookRoutes);
 app.use('/api/savings', savingsRoutes);
 app.use('/api/business', businessRoutes);
 app.use('/api/education', educationRoutes);
+app.use('/api/payment-links', paymentLinkRoutes);
+app.use('/api/vas', vasRoutes);
+app.use('/api/ussd', ussdRoutes);
+app.use('/api/notifications', notificationRoutes);
+app.use('/api/email', emailRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {
