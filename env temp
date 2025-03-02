@@ -17,18 +17,23 @@ SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 SQUAD_API_URL=https://sandbox-api-d.squadco.com
 SQUAD_SECRET_KEY=sandbox_sk_7cd69f28c6280d33f7cb8c0c9a691ba7ccb306e52f44
 SQUAD_PUBLIC_KEY=sandbox_pk_7cd69f28c6280d33f7cb99688e7c7bafbfb012ea3958
-SQUAD_MERCHANT_ID=MOCK_MERCHANT_ID
+SQUAD_MERCHANT_ID=SBN1EBZEQ8
 SQUAD_CALLBACK_URL=http://localhost:5000/api/webhooks/squad
 SQUAD_REDIRECT_URL=http://localhost:3000/payment/success
 
-SQUAD_SANDBOX_SECRET_KEY=sandbox_sk_7cd69f28c6280d33f7cb8c0c9a691ba7ccb306e52f44
-SQUAD_SANDBOX_PUBLIC_KEY=sandbox_pk_7cd69f28c6280d33f7cb99688e7c7bafbfb012ea3958
+# Email Configuration
+EMAIL_HOST=smtp.ethereal.email
+EMAIL_PORT=587
+EMAIL_SECURE=false
+EMAIL_USER=your_test_email
+EMAIL_PASSWORD=your_test_password
+EMAIL_FROM=support@microfund.com
 
 # Frontend
 FRONTEND_URL=https://your-production-frontend-url.com
 
 #ngrok
-API_URL = 'https://c166-105-113-61-142.ngrok-free.app'
+API_URL = 'https://d606-102-90-42-166.ngrok-free.app'
 
 #mock payment toggle
-USE_MOCK_PAYMENT=false
+USE_MOCK_PAYMENT=true
