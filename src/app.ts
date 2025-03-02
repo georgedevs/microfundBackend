@@ -52,12 +52,12 @@ app.use('/api/vas', vasRoutes);
 app.use('/api/ussd', ussdRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/email', emailRoutes);
-
+ 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
-
+ 
 // Error handling middleware (should be last)
 app.use(errorHandler);
 

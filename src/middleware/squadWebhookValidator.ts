@@ -11,7 +11,7 @@ export const squadWebhookValidator = (
   next: NextFunction
 ) => {
   try {
-    const signature = req.headers['x-squad-encrypted-body'] as string;
+const signature = req.headers['x-squad-encrypted-body'] as string;
     
     // Check if signature is present
     if (!signature) {
@@ -23,10 +23,8 @@ export const squadWebhookValidator = (
     }
 
     // Get secret key from environment
-    const secretKey = process.env.NODE_ENV === 'production'
-      ? process.env.SQUAD_SECRET_KEY
-      : process.env.SQUAD_SANDBOX_SECRET_KEY;
-
+    const secretKey = process.env.SQUAD_SECRET_KEY;
+ 
     if (!secretKey) {
       console.error('Squad secret key not configured');
       return res.status(500).json({ 

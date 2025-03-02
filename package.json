@@ -6,8 +6,7 @@
     "@": "src"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "test:api": "cross-env NODE_ENV=development USE_MOCK_PAYMENT=true node tests/comprehensiveTest.js",
+    "test": "cross-env NODE_ENV=development USE_MOCK_PAYMENT=true node tests/comprehensiveTest.js",
     "start": "node dist/server.js",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc",

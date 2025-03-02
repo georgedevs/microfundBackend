@@ -112,21 +112,22 @@ export class ProductService {
     };
   }
 
-  /**
-   * Update product
-   */
-  async updateProduct(
-    userId: string,
-    productId: string,
-    updateData: Partial<{
-      name: string;
-      description: string;
-      price: number;
-      category: string;
-      images: string[];
-      inStock: boolean;
-    }>
-  ) {
+ /**
+ * Update product
+ */
+async updateProduct(
+  userId: string,
+  productId: string,
+  updateData: Partial<{
+    name: string;
+    description: string;
+    price: number;
+    category: string;
+    images: string[];
+    inStock: boolean;
+  }>
+) {
+  try {
     // Find product
     const product = await Product.findById(productId);
 
@@ -141,15 +142,26 @@ export class ProductService {
       throw new AppError('You are not authorized to update this product', 403);
     }
 
-    // Update product
-    const updatedProduct = await Product.findByIdAndUpdate(
-      productId,
-      updateData,
-      { new: true, runValidators: true }
-    );
+    // Update product with timeout protection
+    const updatedProduct = await Promise.race([
+      Product.findByIdAndUpdate(
+        productId,
+        updateData,
+        { new: true, runValidators: true }
+      ),
+      new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Database operation timed out')), 5000)
+      )
+    ]);
 
     return updatedProduct;
+  } catch (error) {
+    if (error.message === 'Database operation timed out') {
+      throw new AppError('Update operation timed out, please try again', 408);
+    }
+    throw error;
   }
+}
 
   /**
    * Delete product

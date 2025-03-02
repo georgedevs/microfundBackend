@@ -46,30 +46,47 @@ export class BankService {
     return Bank.find({ isActive: true }).sort({ name: 1 });
   }
 
-  /**
-   * Verify bank account
-   */
-  async verifyBankAccount(bankCode: string, accountNumber: string) {
-    // Validate inputs
-    if (!bankCode || !accountNumber) {
-      throw new AppError('Bank code and account number are required', 400);
-    }
-    
-    if (accountNumber.length !== 10) {
-      throw new AppError('Account number must be 10 digits', 400);
-    }
-    
-    // Verify bank exists
-    const bank = await Bank.findOne({ code: bankCode });
-    if (!bank) {
-      throw new AppError('Invalid bank code', 400);
-    }
-    
+/**
+ * Verify bank account
+ */
+async verifyBankAccount(bankCode: string, accountNumber: string) {
+  // Validate inputs
+  if (!bankCode || !accountNumber) {
+    throw new AppError('Bank code and account number are required', 400);
+  }
+  
+  if (accountNumber.length !== 10) {
+    throw new AppError('Account number must be 10 digits', 400);
+  }
+  
+  // Verify bank exists
+  const bank = await Bank.findOne({ code: bankCode });
+  if (!bank) {
+    throw new AppError('Invalid bank code', 400);
+  }
+  
+  // For mock environment, return mock account details
+  if (process.env.USE_MOCK_PAYMENT === 'true') {
+    return {
+      account_name: `MOCK USER - ${bankCode}`,
+      account_number: accountNumber
+    };
+  }
+  
+  try {
     // Use payment service to verify account
     const result = await paymentService.lookupBankAccount(bankCode, accountNumber);
-    
     return result.data;
+  } catch (error) {
+    if (process.env.USE_MOCK_PAYMENT === 'true') {
+      return {
+        account_name: `MOCK USER - ${bankCode}`,
+        account_number: accountNumber
+      };
+    }
+    throw new AppError('Error verifying account: ' + (error.message || 'Unknown error'), 500);
   }
+}
 }
 
 // Export as singleton

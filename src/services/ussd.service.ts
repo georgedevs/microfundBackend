@@ -12,12 +12,10 @@ export class USSDService {
 
   constructor() {
     this.apiUrl = process.env.NODE_ENV === 'production' 
-      ? 'https://api-d.squadco.com/transaction/initiate/process-payment' 
-      : 'https://sandbox-api-d.squadco.com/transaction/initiate/process-payment';
+      ? `${process.env.SQUAD_API_URL}/transaction/initiate/process-payment` 
+      : `${process.env.SQUAD_API_URL}/transaction/initiate/process-payment`;
       
-    this.secretKey = process.env.NODE_ENV === 'production'
-      ? process.env.SQUAD_SECRET_KEY || ''
-      : process.env.SQUAD_SANDBOX_SECRET_KEY || '';
+    this.secretKey = process.env.SQUAD_SECRET_KEY || '';
   }
 
   /**

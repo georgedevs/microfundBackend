@@ -13,59 +13,111 @@ export class VirtualAccountService {
 
   constructor() {
     this.apiUrl = process.env.NODE_ENV === 'production' 
-      ? 'https://api-d.squadco.com/virtual-account' 
-      : 'https://sandbox-api-d.squadco.com/virtual-account';
+      ? `${process.env.SQUAD_API_URL}/virtual-account` 
+      : `${process.env.SQUAD_API_URL}/virtual-account`;
       
-    this.secretKey = process.env.NODE_ENV === 'production'
-      ? process.env.SQUAD_SECRET_KEY || ''
-      : process.env.SQUAD_SANDBOX_SECRET_KEY || '';
-      
-    this.merchantId = process.env.NODE_ENV === 'production'
-      ? process.env.SQUAD_MERCHANT_ID || ''
-      : process.env.SQUAD_SANDBOX_MERCHANT_ID || '';
+    this.secretKey = process.env.SQUAD_SECRET_KEY || '';
+    this.merchantId = process.env.SQUAD_MERCHANT_ID || 'SBN1EBZEQ8';
   }
 
-  /**
-   * Create a virtual account for a user
-   */
-  async createVirtualAccount(userId: string) {
-    // Get user details
-    const user = await User.findById(userId);
-    if (!user) {
-      throw new AppError('User not found', 404);
+/**
+ * Create a virtual account for a user
+ */
+async createVirtualAccount(userId: string) {
+    // If mock payment is enabled, create a mock virtual account
+    if (process.env.USE_MOCK_PAYMENT === 'true') {
+      try {
+        // Get user details
+        const user = await User.findById(userId);
+        if (!user) {
+          throw new AppError('User not found', 404);
+        }
+  
+        // Get wallet
+        const wallet = await Wallet.findOne({ userId });
+        if (!wallet) {
+          throw new AppError('Wallet not found', 404);
+        }
+  
+        // Check if wallet already has a virtual account
+        if (wallet.accountNumber) {
+          return {
+            success: true,
+            data: {
+              accountNumber: wallet.accountNumber,
+              accountName: wallet.accountName,
+              bankName: wallet.bankName
+            }
+          };
+        }
+  
+        // Create mock virtual account
+        wallet.squadVirtualAccountId = `MOCK-VA-${userId.substring(0, 6)}`;
+        wallet.accountNumber = `${Math.floor(1000000000 + Math.random() * 9000000000)}`;
+        wallet.accountName = user.fullName;
+        wallet.bankName = "Squad Microfinance Bank";
+        
+        await wallet.save();
+        
+        return {
+          success: true,
+          data: {
+            accountNumber: wallet.accountNumber,
+            accountName: wallet.accountName,
+            bankName: wallet.bankName
+          }
+        };
+      } catch (error) {
+        console.error('Error creating mock virtual account:', error);
+        throw new AppError('Failed to create virtual account', 500);
+      }
     }
-
-    // Get wallet
-    const wallet = await Wallet.findOne({ userId });
-    if (!wallet) {
-      throw new AppError('Wallet not found', 404);
-    }
-
-    // Check if wallet already has a virtual account
-    if (wallet.accountNumber) {
-      throw new AppError('User already has a virtual account', 400);
-    }
-
+  
+    // Real implementation for non-mock environment
     try {
+      // Get user details
+      const user = await User.findById(userId);
+      if (!user) {
+        throw new AppError('User not found', 404);
+      }
+  
+      // Get wallet
+      const wallet = await Wallet.findOne({ userId });
+      if (!wallet) {
+        throw new AppError('Wallet not found', 404);
+      }
+  
+      // Check if wallet already has a virtual account
+      if (wallet.accountNumber) {
+        return {
+          success: true,
+          data: {
+            accountNumber: wallet.accountNumber,
+            accountName: wallet.accountName,
+            bankName: wallet.bankName
+          }
+        };
+      }
+  
       // Extract first and last name
       const nameParts = user.fullName.split(' ');
       const firstName = nameParts[0] || '';
       const lastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : '';
-
+  
       // Create request payload
       const payload = {
         customer_identifier: `MF-${userId.substring(0, 6)}`,
         first_name: firstName,
         last_name: lastName,
-        mobile_num: user.phoneNumber || "08000000000", // Use user's phone if available
+        mobile_num: user.phoneNumber || "08000000000",
         email: user.email,
-        bvn: process.env.SQUAD_TEST_BVN || "22222222222", // Use test BVN in sandbox
-        dob: "30/10/1990", // Default date of birth
+        bvn: process.env.SQUAD_TEST_BVN || "22222222222",
+        dob: "30/10/1990",
         address: `${user.institution || "MicroFund User"}`,
-        gender: "1", // 1 for male as default
-        beneficiary_account: process.env.SQUAD_SETTLEMENT_ACCOUNT // Settlement account
+        gender: "1",
+        beneficiary_account: process.env.SQUAD_SETTLEMENT_ACCOUNT || "4920299492"
       };
-
+  
       // Call Squad API
       const response = await axios.post(
         this.apiUrl,
@@ -75,9 +127,10 @@ export class VirtualAccountService {
             Authorization: `Bearer ${this.secretKey}`,
             'Content-Type': 'application/json',
           },
+          timeout: 15000,
         }
       );
-
+  
       if (response.data && response.data.status === 200) {
         const virtualAccountData = response.data.data;
         
@@ -85,7 +138,7 @@ export class VirtualAccountService {
         wallet.squadVirtualAccountId = virtualAccountData.customer_identifier;
         wallet.accountNumber = virtualAccountData.virtual_account_number;
         wallet.accountName = `${virtualAccountData.first_name} ${virtualAccountData.last_name}`;
-        wallet.bankName = "Squad Microfinance Bank"; // Squad always uses this bank
+        wallet.bankName = "Squad Microfinance Bank";
         
         await wallet.save();
         

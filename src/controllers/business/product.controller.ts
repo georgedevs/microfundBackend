@@ -75,13 +75,17 @@ export const updateProduct = catchAsyncError(async (
   const userId = req.user.id;
   const { id } = req.params;
   
-  const product = await productService.updateProduct(userId, id, req.body);
-  
-  res.status(200).json({
-    success: true,
-    message: 'Product updated successfully',
-    data: product,
-  });
+  try {
+    const product = await productService.updateProduct(userId, id, req.body);
+    
+    res.status(200).json({
+      success: true,
+      message: 'Product updated successfully',
+      data: product,
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
 /**

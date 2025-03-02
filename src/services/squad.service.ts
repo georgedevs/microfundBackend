@@ -14,70 +14,91 @@ export class SquadPaymentService {
     this.apiUrl = process.env.SQUAD_API_URL || 'https://sandbox-api-d.squadco.com';
     this.secretKey = process.env.SQUAD_SECRET_KEY || '';
     this.publicKey = process.env.SQUAD_PUBLIC_KEY || '';
-    this.merchantId = process.env.SQUAD_MERCHANT_ID || '';
+    this.merchantId = process.env.SQUAD_MERCHANT_ID || 'SBN1EBZEQ8';
     this.callbackUrl = process.env.SQUAD_CALLBACK_URL || 'http://localhost:5000/api/webhooks/squad';
     this.redirectUrl = process.env.SQUAD_REDIRECT_URL || 'http://localhost:3000/payment/success';
   }
 
-  /**
-   * Initialize a payment transaction
-   */
-  async initializeTransaction(
-    amount: number,
-    email: string,
-    reference: string,
-    customerName: string,
-    metadata: Record<string, any> = {}
-  ) {
-    try {
-      console.log(`Initializing Squad transaction: ${amount} for ${email}`);
-      
-      const response = await axios.post(
-        `${this.apiUrl}/transaction/initiate`,
-        {
-          amount: amount * 100, // Convert to kobo
-          email,
-          currency: "NGN",
-          initiate_type: "inline",
-          transaction_ref: reference,
-          callback_url: this.callbackUrl,
-          customer_name: customerName,
-          metadata,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${this.secretKey}`,
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-
-      if (response.data && response.data.status === 200) {
-        return {
-          success: true,
-          checkoutUrl: response.data.data.checkout_url,
-          reference,
-        };
-      }
-
-      console.error('Squad API Error:', response.data);
-      throw new AppError(
-        response.data?.message || 'Failed to initialize payment',
-        response.data?.status || 400
-      );
-    } catch (error: any) {
-      console.error('Error initializing transaction:', error.response?.data || error.message);
-      
-      if (error.response) {
-        throw new AppError(
-          error.response.data?.message || 'Error initializing transaction',
-          error.response.status || 500
-        );
-      } 
-      
-      throw new AppError('Network error connecting to payment provider', 500);
+ /**
+ * Initialize a payment transaction
+ */
+async initializeTransaction(
+  amount: number,
+  email: string,
+  reference: string,
+  customerName: string,
+  metadata: Record<string, any> = {}
+) {
+  try {
+    console.log(`Initializing Squad transaction: ${amount} for ${email}`);
+    
+    // If mock payment is enabled, return mock data
+    if (process.env.USE_MOCK_PAYMENT === 'true') {
+      return {
+        success: true,
+        checkoutUrl: `http://localhost:3000/mock-payment/${reference}?amount=${amount}`,
+        reference,
+      };
     }
+    
+    const response = await axios.post(
+      `${this.apiUrl}/transaction/initiate`,
+      {
+        amount: amount * 100, // Convert to kobo
+        email,
+        currency: "NGN",
+        initiate_type: "inline",
+        transaction_ref: reference,
+        callback_url: this.callbackUrl,
+        customer_name: customerName,
+        metadata,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${this.secretKey}`,
+          'Content-Type': 'application/json',
+        },
+        timeout: 15000, // Increase timeout to 15s
+      }
+    );
+
+    if (response.data && response.data.status === 200) {
+      return {
+        success: true,
+        checkoutUrl: response.data.data.checkout_url,
+        reference,
+      };
+    }
+
+    console.error('Squad API Error:', response.data);
+    throw new AppError(
+      response.data?.message || 'Failed to initialize payment',
+      response.data?.status || 400
+    );
+  } catch (error) {
+    // If mock payment is enabled and there's a connection error, return mock data
+    if (process.env.USE_MOCK_PAYMENT === 'true' && 
+       (error.code === 'ECONNREFUSED' || error.code === 'ENOTFOUND')) {
+      console.log('Using mock payment due to connection error');
+      return {
+        success: true,
+        checkoutUrl: `http://localhost:3000/mock-payment/${reference}?amount=${amount}`,
+        reference,
+      };
+    }
+    
+    console.error('Error initializing transaction:', error.response?.data || error.message);
+    
+    if (error.response) {
+      throw new AppError(
+        error.response.data?.message || 'Error initializing transaction',
+        error.response.status || 500
+      );
+    } 
+    
+    throw new AppError('Network error connecting to payment provider', 500);
   }
+}
 
   /**
    * Verify a transaction status

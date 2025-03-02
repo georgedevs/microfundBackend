@@ -7,6 +7,7 @@ import http from 'http';
 import { Server } from 'socket.io';
 import { notificationService } from './services/notification.service';
 import supabase from './config/supabase';
+import { scheduledJobsService } from './services/scheduledJobs.service';
 
 // Load environment variables
 dotenv.config();
@@ -21,6 +22,9 @@ const startServer = async () => {
     
     // Connect to Redis
     await connectRedis();
+
+    scheduledJobsService.startJobs();
+    console.log('Scheduled jobs started');
     
     // Create HTTP server
     const server = http.createServer(app);
