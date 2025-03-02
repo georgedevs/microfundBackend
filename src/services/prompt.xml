@@ -1,0 +1,50 @@
+<prompt>
+  <context>
+    You have full access to my project codebase and are aware of all project requirements.
+  </context>
+  <instructions>
+    <task order="1">
+      <title>Webhook Security</title>
+      <description>
+        Implement an IP whitelist for the Squad webhook. The Squad documentation specifies "Sending IP: 18.133.63.109". Ensure that this IP is whitelisted.
+      </description>
+    </task>
+    <task order="2">
+      <title>Payment Verification Webhook</title>
+      <description>
+        Resolve the inconsistency in webhook signature validation. In squadWebhookValidator.ts, the header "x-squad-signature" is used, but in squad.webhook.ts, "x-squad-encrypted-body" is used. Make these consistent to prevent validation failures and matches the Squads API specification .
+      </description>
+    </task>
+    <task order="3">
+      <title>Virtual Account Implementation</title>
+      <description>
+        Complete the implementation of the Squad Virtual Account API. Although it is documented in the codebase, it is not fully integrated into the services.Find a situation where it could be needed and implement it.
+      </description>
+    </task>
+    <task order="4">
+      <title>Webhook Error Log Integration</title>
+      <description>
+        There is code to retrieve missed webhook transactions but no scheduled job to periodically check for them. Create a scheduled job that regularly monitors and logs any missed webhook events.
+      </description>
+    </task>
+    <task order="5">
+      <title>Implement Comprehensive Testing</title>
+      <description>
+        Expand the test coverage beyond just API tests. Create a comprehensive test file that covers every service, every API, and simulates the full system integration as if presenting at a hackathon. Note that there is no frontend; therefore, ensure all backend functionality is thoroughly tested and that a detailed log of the testing process is generated.
+      </description>
+    </task>
+    <task order="6">
+      <title>System Analysis</title>
+      <description>
+        After integrating the comprehensive test file, update your knowledge with it. Then, analyze the entire system by:
+        - Reviewing the requirements.
+        - Identifying parts that work perfectly.
+        - Identifying parts that are ineffective, do not work as intended, or have issues.
+        - Providing a detailed list of the problems along with the reasons behind each issue.
+      </description>
+    </task>
+  </instructions>
+  <final_note>
+    Ensure that the implementation for all tasks is error-free and free of bugs.
+  </final_note>
+</prompt>

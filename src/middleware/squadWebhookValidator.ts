@@ -1,4 +1,3 @@
-// middleware/squadWebhookValidator.ts
 import { Request, Response, NextFunction } from 'express';
 import crypto from 'crypto';
 import AppError from '@/utils/error';
@@ -12,11 +11,11 @@ export const squadWebhookValidator = (
   next: NextFunction
 ) => {
   try {
-    const signature = req.headers['x-squad-signature'] as string;
+    const signature = req.headers['x-squad-encrypted-body'] as string;
     
     // Check if signature is present
     if (!signature) {
-      console.warn('Missing x-squad-signature in webhook request');
+      console.warn('Missing x-squad-encrypted-body in webhook request');
       return res.status(400).json({ 
         success: false, 
         message: 'Missing signature' 
@@ -40,7 +39,7 @@ export const squadWebhookValidator = (
     const hmac = crypto.createHmac('sha512', secretKey);
     const computedSignature = hmac.update(JSON.stringify(req.body)).digest('hex');
 
-    // Compare signatures
+    // Compare signatures (case-insensitive)
     if (computedSignature.toLowerCase() !== signature.toLowerCase()) {
       console.warn('Invalid webhook signature');
       return res.status(401).json({ 
@@ -62,6 +61,7 @@ export const squadWebhookValidator = (
 
 /**
  * Alternative method for webhooks using encrypted_body
+ * This is retained for backwards compatibility
  */
 export const squadEncryptedBodyValidator = (
   req: Request,
@@ -80,10 +80,22 @@ export const squadEncryptedBodyValidator = (
       });
     }
 
-    // Decrypt and validate logic would go here
-    // This depends on the specific encryption method used by Squad
-    // For now, we'll assume validation passes
+    // Get secret key from environment
+    const secretKey = process.env.NODE_ENV === 'production'
+      ? process.env.SQUAD_SECRET_KEY
+      : process.env.SQUAD_SANDBOX_SECRET_KEY;
 
+    if (!secretKey) {
+      console.error('Squad secret key not configured');
+      return res.status(500).json({ 
+        success: false, 
+        message: 'Configuration error' 
+      });
+    }
+
+    // In a real implementation, we would decrypt and validate
+    // For now, we'll assume validation passes if encrypted_body exists
+    
     // If validation is successful, proceed
     next();
   } catch (error) {

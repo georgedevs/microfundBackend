@@ -10,51 +10,48 @@ import Transaction from '@/models/Transaction';
  * @access Public
  */
 export const handleSquadWebhook = catchAsyncError(async (req: Request, res: Response) => {
-  // Get the signature from headers
-  const signature = req.headers['x-squad-encrypted-body'] as string;
-  if (!signature) {
-    console.warn('Missing signature in Squad webhook');
-    return res.status(400).json({ success: false, message: 'Missing signature' });
-  }
+  // No need to check signature - middleware already validated it
   
-  // Verify signature
-  const isValid = squadPaymentService.verifyWebhookSignature(signature, req.body);
+  const { Event, TransactionRef, Body } = req.body;
   
-  if (!isValid) {
-    console.warn('Invalid signature in Squad webhook');
-    return res.status(401).json({ success: false, message: 'Invalid signature' });
-  }
-  
-  const { event_type, data } = req.body;
-  
-  console.log(`Received webhook: ${event_type}`);
+  console.log(`Received webhook: ${Event}, Reference: ${TransactionRef}`);
   
   // Handle different event types
-  switch (event_type) {
-    case 'charge.completed':
+  switch (Event) {
+    case 'charge_successful':
       // Process successful payment
-      await processSuccessfulPayment(data);
+      await processSuccessfulPayment(TransactionRef, Body);
       break;
       
     default:
-      console.log(`Unhandled webhook event: ${event_type}`);
+      console.log(`Unhandled webhook event: ${Event}`);
   }
   
   // Always return 200 to acknowledge receipt
-  return res.status(200).json({ success: true, message: 'Webhook received' });
+  return res.status(200).json({ 
+    success: true, 
+    message: 'Webhook received',
+    transaction_reference: TransactionRef,
+    response_code: 200,
+    response_description: 'Success'
+  });
 });
 
 /**
  * Process successful payment
  */
-async function processSuccessfulPayment(data: any) {
-  const { reference } = data;
-  
+async function processSuccessfulPayment(reference: string, data: any) {
   // Find transaction by reference
   const transaction = await Transaction.findOne({ reference });
   
   if (!transaction) {
     console.warn(`Transaction not found for reference: ${reference}`);
+    return;
+  }
+  
+  // Check if transaction is already completed
+  if (transaction.status === 'completed') {
+    console.log(`Transaction ${reference} already processed`);
     return;
   }
   

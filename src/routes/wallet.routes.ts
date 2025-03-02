@@ -7,6 +7,7 @@ import {
 } from '@/controllers/wallet.controller';
 import { withdrawToBank } from '@/controllers/withdraw.controller';
 import { createPaymentLink } from '@/controllers/payment-link.controller';
+import { createVirtualAccount } from '@/controllers/virtualAccount.controller';
 import { 
   completeMockPayment, 
   getMockPaymentStatus,
@@ -117,7 +118,7 @@ walletRoutes.get('/deposit/:reference', verifyDeposit);
  *         name: type
  *         schema:
  *           type: string
- *           enum: [deposit, withdrawal, investment, return, group_contribution, group_distribution]
+ *           enum: [deposit, withdrawal, investment, return, group_contribution, group_distribution, virtual_account_deposit]
  *         description: Filter by transaction type
  *       - in: query
  *         name: status
@@ -213,6 +214,24 @@ walletRoutes.post('/withdraw', withdrawToBank);
  *         description: Not authorized
  */
 walletRoutes.post('/payment-link', createPaymentLink);
+
+/**
+ * @swagger
+ * /wallet/virtual-account:
+ *   post:
+ *     summary: Create a virtual account for the user
+ *     tags: [Wallet]
+ *     security:
+ *       - BearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Virtual account created successfully
+ *       400:
+ *         description: User already has a virtual account
+ *       401:
+ *         description: Not authorized
+ */
+walletRoutes.post('/virtual-account', createVirtualAccount);
 
 // Add mock routes for development and testing
 if (process.env.NODE_ENV === 'development' || process.env.USE_MOCK_PAYMENT === 'true') {
