@@ -1,0 +1,496 @@
+API TEST RUN: 2025-02-28T10:03:49.710Z
+Mode: LIVE
+---------------------------------------------
+
+[2025-02-28T10:03:49.715Z] Starting MicroFund API Tests
+[2025-02-28T10:03:49.718Z] Mode: LIVE
+[2025-02-28T10:03:49.719Z] ===== AUTHENTICATION TESTS =====
+[2025-02-28T10:03:49.721Z] Sending POST request to /auth/login with data: {"email":"test@university.edu.ng","password":"Password123!"}
+[2025-02-28T10:03:50.744Z] Response status: 200
+[2025-02-28T10:03:50.745Z] Response data: {
+  "success": true,
+  "message": "User logged in successfully",
+  "data": {
+    "user": {
+      "id": "67c0a5281bf6f704c44144f7",
+      "fullName": "Test User",
+      "email": "test@university.edu.ng",
+      "institution": "University of Lagos",
+      "walletBalance": 7500
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsImtpZCI6IktreHEvc0txYUU1aStnQnAiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2V5ZWNzdWZvb3FrZmZsbXVramh5LnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI3NTk1YmYxYS1iZDI2LTRhOWMtYTFmOC0yOWVkYWI4Y2NmMDEiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzQwNzQwNjMwLCJpYXQiOjE3NDA3MzcwMzAsImVtYWlsIjoidGVzdEB1bml2ZXJzaXR5LmVkdS5uZyIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnsiZW1haWwiOiJ0ZXN0QHVuaXZlcnNpdHkuZWR1Lm5nIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwic3ViIjoiNzU5NWJmMWEtYmQyNi00YTljLWExZjgtMjllZGFiOGNjZjAxIn0sInJvbGUiOiJhdXRoZW50aWNhdGVkIiwiYWFsIjoiYWFsMSIsImFtciI6W3sibWV0aG9kIjoicGFzc3dvcmQiLCJ0aW1lc3RhbXAiOjE3NDA3MzcwMzB9XSwic2Vzc2lvbl9pZCI6Ijk3MjE3NjI0LTg5MGUtNGZkOC1iNzhiLWY4YjE1ZjI5NDkzNSIsImlzX2Fub255bW91cyI6ZmFsc2V9.NDm5LQMJNsmGzjmWbvXHEmwu3WvzKNWiEijS0R8P3Jk",
+    "refreshToken": "zbEh-vGAIdIeWC2n_FR2Vg"
+  }
+}
+[2025-02-28T10:03:50.746Z] Login successful
+[2025-02-28T10:03:50.747Z] Sending GET request to /auth/me
+[2025-02-28T10:03:51.096Z] Response status: 200
+[2025-02-28T10:03:51.097Z] Response data: {
+  "success": true,
+  "data": {
+    "user": {
+      "_id": "67c0a5281bf6f704c44144f7",
+      "supabaseId": "7595bf1a-bd26-4a9c-a1f8-29edab8ccf01",
+      "fullName": "Test User",
+      "email": "test@university.edu.ng",
+      "institution": "University of Lagos",
+      "department": "Computer Science",
+      "level": "300",
+      "walletBalance": 7500,
+      "financialLiteracyScore": 0,
+      "createdAt": "2025-02-27T17:47:20.127Z",
+      "updatedAt": "2025-02-28T09:46:28.011Z",
+      "__v": 0
+    }
+  }
+}
+[2025-02-28T10:03:51.099Z] User ID: 67c0a5281bf6f704c44144f7
+[2025-02-28T10:03:51.100Z] Authentication tests completed successfully
+[2025-02-28T10:03:51.101Z] ===== WALLET BASIC TESTS =====
+[2025-02-28T10:03:51.101Z] Sending GET request to /wallet
+[2025-02-28T10:03:51.812Z] Response status: 200
+[2025-02-28T10:03:51.813Z] Response data: {
+  "success": true,
+  "data": {
+    "wallet": {
+      "_id": "67c0b001b87b9c87db697334",
+      "userId": "67c0a5281bf6f704c44144f7",
+      "bankName": "Squad Microfinance Bank",
+      "balance": 7500,
+      "isActive": true,
+      "createdAt": "2025-02-27T18:33:37.651Z",
+      "updatedAt": "2025-02-28T09:46:27.655Z",
+      "__v": 0
+    },
+    "recentTransactions": [
+      {
+        "_id": "67c186b90e1d75be5053b888",
+        "userId": "67c0a5281bf6f704c44144f7",
+        "type": "deposit",
+        "amount": 1000,
+        "fee": 0,
+        "status": "failed",
+        "reference": "MF-DEP-1740736182386-67c0a",
+        "description": "Wallet deposit",
+        "metadata": {
+          "checkoutUrl": "https://sandbox-pay.squadco.com/MF-DEP-1740736182386-67c0a"
+        },
+        "createdAt": "2025-02-28T09:49:45.400Z",
+        "updatedAt": "2025-02-28T09:50:04.336Z",
+        "__v": 0
+      },
+      {
+        "_id": "67c18543dffacb9bc65b5bec",
+        "userId": "67c0a5281bf6f704c44144f7",
+        "type": "deposit",
+        "amount": 1000,
+        "fee": 0,
+        "status": "completed",
+        "reference": "MF-DEP-1740735810025-67c0a",
+        "description": "Wallet deposit",
+        "metadata": {
+          "checkoutUrl": "https://sandbox-pay.squadco.com/MF-DEP-1740735810025-67c0a"
+        },
+        "createdAt": "2025-02-28T09:43:31.323Z",
+        "updatedAt": "2025-02-28T09:46:27.362Z",
+        "__v": 0
+      },
+      {
+        "_id": "67c1839b6291614c31ff3e63",
+        "userId": "67c0a5281bf6f704c44144f7",
+        "type": "deposit",
+        "amount": 1000,
+        "fee": 0,
+        "status": "completed",
+        "reference": "MF-DEP-1740735385543-67c0a",
+        "description": "Wallet deposit",
+        "metadata": {
+          "checkoutUrl": "https://sandbox-pay.squadco.com/MF-DEP-1740735385543-67c0a"
+        },
+        "createdAt": "2025-02-28T09:36:27.020Z",
+        "updatedAt": "2025-02-28T09:37:38.804Z",
+        "__v": 0
+      },
+      {
+        "_id": "67c174add773405274cad52d",
+        "userId": "67c0a5281bf6f704c44144f7",
+        "type": "deposit",
+        "amount": 5000,
+        "fee": 0,
+        "status": "completed",
+        "reference": "MF-DEP-1740731562728-67c0a",
+        "description": "Wallet deposit",
+        "metadata": {
+          "checkoutUrl": "https://sandbox-pay.squadco.com/MF-DEP-1740731562728-67c0a"
+        },
+        "createdAt": "2025-02-28T08:32:45.255Z",
+        "updatedAt": "2025-02-28T08:34:47.877Z",
+        "__v": 0
+      },
+      {
+        "_id": "67c0ea8da3bac603bf2943f1",
+        "userId": "67c0a5281bf6f704c44144f7",
+        "type": "deposit",
+        "amount": 2000,
+        "fee": 0,
+        "status": "pending",
+        "reference": "MF-LNK-1740696205022-67c0a",
+        "description": "Payment link deposit: Test payment link",
+        "metadata": {
+          "paymentLinkHash": "mf-67c0a528-1740696202053",
+          "paymentLinkUrl": "https://sandbox-pay.squadco.com/mf-67c0a528-1740696202053"
+        },
+        "createdAt": "2025-02-27T22:43:25.026Z",
+        "updatedAt": "2025-02-27T22:43:25.026Z",
+        "__v": 0
+      }
+    ]
+  }
+}
+[2025-02-28T10:03:51.817Z] Initial wallet balance: 7500
+[2025-02-28T10:03:51.818Z] Wallet basic tests completed successfully
+[2025-02-28T10:03:51.819Z] ===== DEPOSIT TESTS =====
+[2025-02-28T10:03:51.819Z] Sending POST request to /wallet/deposit with data: {"amount":1000}
+[2025-02-28T10:03:57.129Z] Response status: 200
+[2025-02-28T10:03:57.131Z] Response data: {
+  "success": true,
+  "data": {
+    "reference": "MF-DEP-1740737032402-67c0a",
+    "checkoutUrl": "https://sandbox-pay.squadco.com/MF-DEP-1740737032402-67c0a",
+    "message": "Deposit initiated. Please complete payment."
+  }
+}
+[2025-02-28T10:03:57.133Z] Deposit initiated with reference: MF-DEP-1740737032402-67c0a
+[2025-02-28T10:03:57.134Z] Checkout URL: https://sandbox-pay.squadco.com/MF-DEP-1740737032402-67c0a
+[2025-02-28T10:03:57.135Z] IMPORTANT: In live mode, you need to manually complete the payment by visiting the checkout URL
+[2025-02-28T10:03:57.137Z] After completing payment, continue the test script to verify the deposit
+[2025-02-28T10:03:57.138Z] Sending GET request to /wallet/deposit/MF-DEP-1740737032402-67c0a
+[2025-02-28T10:04:00.624Z] Response status: 200
+[2025-02-28T10:04:00.626Z] Response data: {
+  "success": false,
+  "message": "Payment verification failed",
+  "data": {
+    "transaction": {
+      "_id": "67c18a0c22909595b1217315",
+      "userId": "67c0a5281bf6f704c44144f7",
+      "type": "deposit",
+      "amount": 1000,
+      "fee": 0,
+      "status": "failed",
+      "reference": "MF-DEP-1740737032402-67c0a",
+      "description": "Wallet deposit",
+      "metadata": {
+        "checkoutUrl": "https://sandbox-pay.squadco.com/MF-DEP-1740737032402-67c0a"
+      },
+      "createdAt": "2025-02-28T10:03:56.973Z",
+      "updatedAt": "2025-02-28T10:04:00.472Z",
+      "__v": 0
+    }
+  }
+}
+[2025-02-28T10:04:00.630Z] Sending GET request to /wallet
+[2025-02-28T10:04:01.332Z] Response status: 200
+[2025-02-28T10:04:01.332Z] Response data: {
+  "success": true,
+  "data": {
+    "wallet": {
+      "_id": "67c0b001b87b9c87db697334",
+      "userId": "67c0a5281bf6f704c44144f7",
+      "bankName": "Squad Microfinance Bank",
+      "balance": 7500,
+      "isActive": true,
+      "createdAt": "2025-02-27T18:33:37.651Z",
+      "updatedAt": "2025-02-28T09:46:27.655Z",
+      "__v": 0
+    },
+    "recentTransactions": [
+      {
+        "_id": "67c18a0c22909595b1217315",
+        "userId": "67c0a5281bf6f704c44144f7",
+        "type": "deposit",
+        "amount": 1000,
+        "fee": 0,
+        "status": "failed",
+        "reference": "MF-DEP-1740737032402-67c0a",
+        "description": "Wallet deposit",
+        "metadata": {
+          "checkoutUrl": "https://sandbox-pay.squadco.com/MF-DEP-1740737032402-67c0a"
+        },
+        "createdAt": "2025-02-28T10:03:56.973Z",
+        "updatedAt": "2025-02-28T10:04:00.472Z",
+        "__v": 0
+      },
+      {
+        "_id": "67c186b90e1d75be5053b888",
+        "userId": "67c0a5281bf6f704c44144f7",
+        "type": "deposit",
+        "amount": 1000,
+        "fee": 0,
+        "status": "failed",
+        "reference": "MF-DEP-1740736182386-67c0a",
+        "description": "Wallet deposit",
+        "metadata": {
+          "checkoutUrl": "https://sandbox-pay.squadco.com/MF-DEP-1740736182386-67c0a"
+        },
+        "createdAt": "2025-02-28T09:49:45.400Z",
+        "updatedAt": "2025-02-28T09:50:04.336Z",
+        "__v": 0
+      },
+      {
+        "_id": "67c18543dffacb9bc65b5bec",
+        "userId": "67c0a5281bf6f704c44144f7",
+        "type": "deposit",
+        "amount": 1000,
+        "fee": 0,
+        "status": "completed",
+        "reference": "MF-DEP-1740735810025-67c0a",
+        "description": "Wallet deposit",
+        "metadata": {
+          "checkoutUrl": "https://sandbox-pay.squadco.com/MF-DEP-1740735810025-67c0a"
+        },
+        "createdAt": "2025-02-28T09:43:31.323Z",
+        "updatedAt": "2025-02-28T09:46:27.362Z",
+        "__v": 0
+      },
+      {
+        "_id": "67c1839b6291614c31ff3e63",
+        "userId": "67c0a5281bf6f704c44144f7",
+        "type": "deposit",
+        "amount": 1000,
+        "fee": 0,
+        "status": "completed",
+        "reference": "MF-DEP-1740735385543-67c0a",
+        "description": "Wallet deposit",
+        "metadata": {
+          "checkoutUrl": "https://sandbox-pay.squadco.com/MF-DEP-1740735385543-67c0a"
+        },
+        "createdAt": "2025-02-28T09:36:27.020Z",
+        "updatedAt": "2025-02-28T09:37:38.804Z",
+        "__v": 0
+      },
+      {
+        "_id": "67c174add773405274cad52d",
+        "userId": "67c0a5281bf6f704c44144f7",
+        "type": "deposit",
+        "amount": 5000,
+        "fee": 0,
+        "status": "completed",
+        "reference": "MF-DEP-1740731562728-67c0a",
+        "description": "Wallet deposit",
+        "metadata": {
+          "checkoutUrl": "https://sandbox-pay.squadco.com/MF-DEP-1740731562728-67c0a"
+        },
+        "createdAt": "2025-02-28T08:32:45.255Z",
+        "updatedAt": "2025-02-28T08:34:47.877Z",
+        "__v": 0
+      }
+    ]
+  }
+}
+[2025-02-28T10:04:01.337Z] Updated wallet balance: 7500 (was 7500)
+[2025-02-28T10:04:01.337Z] NOTE: Balance not increased yet. In live mode, this may be because payment is still processing
+[2025-02-28T10:04:01.338Z] Deposit tests completed
+[2025-02-28T10:04:01.339Z] ===== BANK TESTS =====
+[2025-02-28T10:04:01.339Z] Sending GET request to /banks
+[2025-02-28T10:04:01.535Z] Response status: 200
+[2025-02-28T10:04:01.536Z] Response data: {
+  "success": true,
+  "data": [
+    {
+      "_id": "67c0e69a73cbc70ccfc04772",
+      "code": "000014",
+      "name": "Access Bank",
+      "isActive": true,
+      "__v": 0,
+      "createdAt": "2025-02-27T22:26:34.579Z",
+      "updatedAt": "2025-02-27T22:26:34.579Z"
+    },
+    {
+      "_id": "67c0e69a73cbc70ccfc0476d",
+      "code": "000009",
+      "name": "Citibank",
+      "isActive": true,
+      "__v": 0,
+      "createdAt": "2025-02-27T22:26:34.578Z",
+      "updatedAt": "2025-02-27T22:26:34.578Z"
+    },
+    {
+      "_id": "67c0e69a73cbc70ccfc04769",
+      "code": "000005",
+      "name": "Diamond Bank",
+      "isActive": true,
+      "__v": 0,
+      "createdAt": "2025-02-27T22:26:34.577Z",
+      "updatedAt": "2025-02-27T22:26:34.577Z"
+    },
+    {
+      "_id": "67c0e69a73cbc70ccfc0476e",
+      "code": "000010",
+      "name": "Ecobank",
+      "isActive": true,
+      "__v": 0,
+      "createdAt": "2025-02-27T22:26:34.578Z",
+      "updatedAt": "2025-02-27T22:26:34.578Z"
+    },
+    {
+      "_id": "67c0e69a73cbc70ccfc04767",
+      "code": "000003",
+      "name": "FCMB",
+      "isActive": true,
+      "__v": 0,
+      "createdAt": "2025-02-27T22:26:34.576Z",
+      "updatedAt": "2025-02-27T22:26:34.576Z"
+    },
+    {
+      "_id": "67c0e69a73cbc70ccfc0476b",
+      "code": "000007",
+      "name": "Fidelity Bank",
+      "isActive": true,
+      "__v": 0,
+      "createdAt": "2025-02-27T22:26:34.577Z",
+      "updatedAt": "2025-02-27T22:26:34.577Z"
+    },
+    {
+      "_id": "67c0e69a73cbc70ccfc04774",
+      "code": "000016",
+      "name": "First Bank",
+      "isActive": true,
+      "__v": 0,
+      "createdAt": "2025-02-27T22:26:34.579Z",
+      "updatedAt": "2025-02-27T22:26:34.579Z"
+    },
+    {
+      "_id": "67c0e69a73cbc70ccfc04771",
+      "code": "000013",
+      "name": "GTBank",
+      "isActive": true,
+      "__v": 0,
+      "createdAt": "2025-02-27T22:26:34.579Z",
+      "updatedAt": "2025-02-27T22:26:34.579Z"
+    },
+    {
+      "_id": "67c0e69a73cbc70ccfc0476a",
+      "code": "000006",
+      "name": "JAIZ Bank",
+      "isActive": true,
+      "__v": 0,
+      "createdAt": "2025-02-27T22:26:34.577Z",
+      "updatedAt": "2025-02-27T22:26:34.577Z"
+    },
+    {
+      "_id": "67c0e69a73cbc70ccfc04766",
+      "code": "000002",
+      "name": "Keystone Bank",
+      "isActive": true,
+      "__v": 0,
+      "createdAt": "2025-02-27T22:26:34.575Z",
+      "updatedAt": "2025-02-27T22:26:34.575Z"
+    },
+    {
+      "_id": "67c0e69a73cbc70ccfc0476c",
+      "code": "000008",
+      "name": "Polaris Bank",
+      "isActive": true,
+      "__v": 0,
+      "createdAt": "2025-02-27T22:26:34.578Z",
+      "updatedAt": "2025-02-27T22:26:34.578Z"
+    },
+    {
+      "_id": "67c0e69a73cbc70ccfc04770",
+      "code": "000012",
+      "name": "StanbicIBTC",
+      "isActive": true,
+      "__v": 0,
+      "createdAt": "2025-02-27T22:26:34.578Z",
+      "updatedAt": "2025-02-27T22:26:34.578Z"
+    },
+    {
+      "_id": "67c0e69a73cbc70ccfc04765",
+      "code": "000001",
+      "name": "Sterling Bank",
+      "isActive": true,
+      "__v": 0,
+      "createdAt": "2025-02-27T22:26:34.574Z",
+      "updatedAt": "2025-02-27T22:26:34.574Z"
+    },
+    {
+      "_id": "67c0e69a73cbc70ccfc04768",
+      "code": "000004",
+      "name": "United Bank for Africa",
+      "isActive": true,
+      "__v": 0,
+      "createdAt": "2025-02-27T22:26:34.576Z",
+      "updatedAt": "2025-02-27T22:26:34.576Z"
+    },
+    {
+      "_id": "67c0e69a73cbc70ccfc0476f",
+      "code": "000011",
+      "name": "Unity Bank",
+      "isActive": true,
+      "__v": 0,
+      "createdAt": "2025-02-27T22:26:34.578Z",
+      "updatedAt": "2025-02-27T22:26:34.578Z"
+    },
+    {
+      "_id": "67c0e69a73cbc70ccfc04775",
+      "code": "000017",
+      "name": "Wema Bank",
+      "isActive": true,
+      "__v": 0,
+      "createdAt": "2025-02-27T22:26:34.579Z",
+      "updatedAt": "2025-02-27T22:26:34.579Z"
+    },
+    {
+      "_id": "67c0e69a73cbc70ccfc04773",
+      "code": "000015",
+      "name": "Zenith Bank",
+      "isActive": true,
+      "__v": 0,
+      "createdAt": "2025-02-27T22:26:34.579Z",
+      "updatedAt": "2025-02-27T22:26:34.579Z"
+    }
+  ]
+}
+[2025-02-28T10:04:01.542Z] Retrieved 17 banks
+[2025-02-28T10:04:01.543Z] Testing live account verification
+[2025-02-28T10:04:01.543Z] Sending POST request to /banks/verify-account with data: {"bankCode":"000013","accountNumber":"0123456789"}
+[2025-02-28T10:04:02.834Z] Response status: 400
+[2025-02-28T10:04:02.834Z] Response data: {
+  "success": false,
+  "error": "Merchant not eligible to use this endpoint",
+  "stack": "Error: Merchant not eligible to use this endpoint\n    at SquadPaymentService.<anonymous> (C:\\Users\\USER\\Desktop\\microfund-backend\\src\\services\\squad.service.ts:166:13)\n    at Generator.throw (<anonymous>)\n    at rejected (C:\\Users\\USER\\Desktop\\microfund-backend\\src\\services\\squad.service.ts:6:65)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)"
+}
+[2025-02-28T10:04:02.835Z] ERROR: Bank account verification failed - this may affect withdrawal tests
+[2025-02-28T10:04:02.837Z] Bank tests completed
+[2025-02-28T10:04:02.837Z] ===== PAYMENT LINK TESTS =====
+[2025-02-28T10:04:02.838Z] Sending POST request to /wallet/payment-link with data: {"amount":2000,"description":"Test payment link"}
+[2025-02-28T10:04:05.950Z] Response status: 200
+[2025-02-28T10:04:05.951Z] Response data: {
+  "success": true,
+  "message": "Payment link created successfully",
+  "data": {
+    "success": true,
+    "reference": "MF-LNK-1740737045799-67c0a",
+    "paymentLink": "https://sandbox-pay.squadco.com/mf-67c0a528-1740737043420",
+    "hash": "mf-67c0a528-1740737043420",
+    "amount": 2000,
+    "description": "Test payment link"
+  }
+}
+[2025-02-28T10:04:05.955Z] Payment link created: https://sandbox-pay.squadco.com/mf-67c0a528-1740737043420
+[2025-02-28T10:04:05.955Z] Payment link hash: mf-67c0a528-1740737043420
+[2025-02-28T10:04:05.956Z] Payment link reference: MF-LNK-1740737045799-67c0a
+[2025-02-28T10:04:05.957Z] NOTE: In live mode, you would share this link with users to make payments
+[2025-02-28T10:04:05.957Z] Payment link tests completed
+[2025-02-28T10:04:05.958Z] ===== WITHDRAWAL TESTS =====
+[2025-02-28T10:04:05.959Z] Testing live withdrawal
+[2025-02-28T10:04:05.959Z] Sending POST request to /wallet/withdraw with data: {"amount":500,"bankCode":"000013","accountNumber":"0123456789","accountName":"TEST ACCOUNT"}
+[2025-02-28T10:04:06.914Z] Response status: 400
+[2025-02-28T10:04:06.915Z] Response data: {
+  "success": false,
+  "error": "Merchant not eligible to use this endpoint",
+  "stack": "Error: Merchant not eligible to use this endpoint\n    at SquadPaymentService.<anonymous> (C:\\Users\\USER\\Desktop\\microfund-backend\\src\\services\\squad.service.ts:166:13)\n    at Generator.throw (<anonymous>)\n    at rejected (C:\\Users\\USER\\Desktop\\microfund-backend\\src\\services\\squad.service.ts:6:65)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)"
+}
+[2025-02-28T10:04:06.916Z] ERROR: Withdrawal failed
+[2025-02-28T10:04:06.917Z] ERROR: 
+❌ TESTS FAILED: Withdrawal test failed

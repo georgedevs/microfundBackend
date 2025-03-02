@@ -1,0 +1,31 @@
+NODE_ENV=development
+PORT=5000
+
+# MongoDB
+MONGODB_URI= 'mongodb+srv://ukohgeorgeayomide:DhCP5P0EMAgQ5EAU@cluster0.bgkbi.mongodb.net/'
+
+# Redis
+REDIS_URL = 'rediss://default:AWfMAAIjcDFhNTc0NjIwNjVjNzg0NTFmYmQ2ZjkwMjcwYmRjMzY1NHAxMA@gorgeous-ferret-26572.upstash.io:6379'
+
+# Supabase
+SUPABASE_URL = 'https://eyecsufooqkfflmukjhy.supabase.co'
+SUPABASE_SERVICE_KEY= 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV5ZWNzdWZvb3FrZmZsbXVramh5Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0MDY2OTg4MiwiZXhwIjoyMDU2MjQ1ODgyfQ.2-6G6pW4Zg5Oe-evYD9ns_l5gkqpD5s-3muvdMla_Zs'
+SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV5ZWNzdWZvb3FrZmZsbXVramh5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA2Njk4ODIsImV4cCI6MjA1NjI0NTg4Mn0.S8qelycyGfVxzuoo8dLhaaIXhyJaBmMhJiUQ6QcFdKk'
+
+
+# Squad API
+SQUAD_API_URL=https://sandbox-api-d.squadco.com
+SQUAD_SECRET_KEY=sandbox_sk_7cd69f28c6280d33f7cb8c0c9a691ba7ccb306e52f44
+SQUAD_PUBLIC_KEY=sandbox_pk_7cd69f28c6280d33f7cb99688e7c7bafbfb012ea3958
+SQUAD_MERCHANT_ID=MOCK_MERCHANT_ID
+SQUAD_CALLBACK_URL=http://localhost:5000/api/webhooks/squad
+SQUAD_REDIRECT_URL=http://localhost:3000/payment/success
+
+# Frontend
+FRONTEND_URL=https://your-production-frontend-url.com
+
+#ngrok
+API_URL = 'https://c166-105-113-61-142.ngrok-free.app'
+
+#mock payment toggle
+USE_MOCK_PAYMENT=false
