@@ -6,8 +6,6 @@ import {
   getTransactionHistory 
 } from '@/controllers/wallet.controller';
 import { withdrawToBank } from '@/controllers/withdraw.controller';
-import { createPaymentLink } from '@/controllers/payment-link.controller';
-import { createVirtualAccount } from '@/controllers/virtualAccount.controller';
 import { 
   completeMockPayment, 
   getMockPaymentStatus,
@@ -180,58 +178,6 @@ walletRoutes.get('/transactions', getTransactionHistory);
  */
 walletRoutes.post('/withdraw', withdrawToBank);
 
-/**
- * @swagger
- * /wallet/payment-link:
- *   post:
- *     summary: Create payment link for funding
- *     tags: [Wallet]
- *     security:
- *       - BearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - amount
- *             properties:
- *               amount:
- *                 type: number
- *                 description: Amount for payment link
- *                 example: 1000
- *               description:
- *                 type: string
- *                 description: Description for payment
- *                 example: "Wallet funding"
- *     responses:
- *       200:
- *         description: Payment link created
- *       400:
- *         description: Invalid input
- *       401:
- *         description: Not authorized
- */
-walletRoutes.post('/payment-link', createPaymentLink);
-
-/**
- * @swagger
- * /wallet/virtual-account:
- *   post:
- *     summary: Create a virtual account for the user
- *     tags: [Wallet]
- *     security:
- *       - BearerAuth: []
- *     responses:
- *       200:
- *         description: Virtual account created successfully
- *       400:
- *         description: User already has a virtual account
- *       401:
- *         description: Not authorized
- */
-walletRoutes.post('/virtual-account', createVirtualAccount);
 
 // Add mock routes for development and testing
 if (process.env.NODE_ENV === 'development' || process.env.USE_MOCK_PAYMENT === 'true') {
